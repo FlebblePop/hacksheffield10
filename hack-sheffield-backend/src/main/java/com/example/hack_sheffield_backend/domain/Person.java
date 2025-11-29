@@ -13,7 +13,7 @@ public abstract class Person {
     private int id;
     private String name;
 
-    @OneToMany
+    @OneToMany(mappedBy = "Item")
     private List<Item> inventory;
 
     private int money;
@@ -21,7 +21,6 @@ public abstract class Person {
     private int maxHp;
     private int strength;
     private int agility;
-    private int intelligence;
 
     public Person() {}
 
@@ -33,7 +32,6 @@ public abstract class Person {
         this.hp = this.maxHp;
         this.strength = 10;
         this.agility = 10;
-        this.intelligence = 10;
     }
 
     public void setId(int id) {

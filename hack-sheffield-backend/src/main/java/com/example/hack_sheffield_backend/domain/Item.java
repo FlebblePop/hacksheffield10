@@ -13,7 +13,7 @@ public class Item {
     private String name;
 
     @ManyToOne
-    private Player player;
+    private Person person;
 
     public void setId(int id) {
         this.id = id;
