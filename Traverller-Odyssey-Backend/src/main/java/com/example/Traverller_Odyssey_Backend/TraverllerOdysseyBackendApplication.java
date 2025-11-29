@@ -1,5 +1,6 @@
 package com.example.Traverller_Odyssey_Backend;
 
+import com.example.Traverller_Odyssey_Backend.domain.Player;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,6 +29,9 @@ public class TraverllerOdysseyBackendApplication {
             Character pirate2 = new Character("Pirate2", "");
             Character pirate3 = new Character("Pirate3", "");
             Character rescuer = new Character("Rescuer", "");
+
+            // Create player
+            Player player = new Player("Trotsky");
 
             // Create scenes
             Scene scene1 = new Scene("tavern.png", "Welcome to the tavern", new ArrayList<>(Arrays.asList(gemini, chatgpt, boatSeller)));
