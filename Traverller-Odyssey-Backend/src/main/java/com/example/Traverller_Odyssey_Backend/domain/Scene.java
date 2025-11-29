@@ -1,6 +1,7 @@
 package com.example.hack_sheffield_backend.domain;
 
 import com.example.hack_sheffield_backend.dto.SceneDTO;
+import com.example.hack_sheffield_backend.domain.Character;
 import jakarta.persistence.*;
 
 import java.util.List;
