@@ -1,9 +1,7 @@
 package com.example.hack_sheffield_backend.domain;
 
+import com.example.hack_sheffield_backend.dto.CharacterDTO;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-
-import java.util.List;
 
 @Entity
 public class Character extends Person {
@@ -15,5 +13,15 @@ public class Character extends Person {
         super(name);
 
         this.prompt = prompt;
+    }
+
+    public String getPrompt() { return this.prompt; }
+
+    public void setPrompt(String prompt) { this.prompt = prompt; }
+
+    public CharacterDTO toDTO() {
+        CharacterDTO dto = new CharacterDTO();
+        dto.setPrompt(prompt);
+        return dto;
     }
 }

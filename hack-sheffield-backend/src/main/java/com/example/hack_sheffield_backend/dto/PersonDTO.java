@@ -1,20 +1,20 @@
-package com.example.hack_sheffield_backend.domain;
+package com.example.hack_sheffield_backend.dto;
 
-import com.example.hack_sheffield_backend.dto.PersonDTO;
-import jakarta.persistence.*;
+import com.example.hack_sheffield_backend.domain.Item;
+import com.example.hack_sheffield_backend.domain.Person;
+import com.example.hack_sheffield_backend.domain.Pronouns;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name="persons")
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Person {
-    @Id
+public abstract class PersonDTO {
+    public PersonDTO() {}
+
     private int id;
     private String name;
 
-    @OneToMany(mappedBy = "id")
+
     private List<Item> inventory;
 
     private int money;
@@ -23,20 +23,20 @@ public abstract class Person {
     private int strength;
     private int agility;
 
-    @OneToMany(mappedBy = "id")
+
     private List <Pronouns> pronouns;
 
-    public Person() {}
-
-    public Person(String name) {
-        this.name = name;
-        this.inventory = new ArrayList<>();
-        this.money = 0;
-        this.maxHp = 20;
-        this.hp = this.maxHp;
-        this.strength = 10;
-        this.agility = 10;
-        this.pronouns = new ArrayList<>();
+    public Person toEntity(String name) {
+        Person person = new Person() {};
+        person.setName(name);
+        person.setInventory(inventory);
+        person.setMoney(money);
+        person.setHp(hp);
+        person.setMaxHp(maxHp);
+        person.setStrength(strength);
+        person.setAgility(agility);
+        person.setPronouns(pronouns);
+        return  person;
     }
 
     public void setName(String name) {
@@ -95,21 +95,4 @@ public abstract class Person {
 
     public int getMaxHp() { return maxHp; }
 
-    public PersonDTO toDTO() {
-        PersonDTO dto = new PersonDTO() {};
-        dto.setId(this.id);
-        dto.setName(this.name);
-        dto.setInventory(this.inventory);
-        dto.setMoney(this.money);
-        dto.setHp(this.hp);
-        dto.setMaxHp(this.maxHp);
-        dto.setStrength(this.strength);
-        dto.setAgility(this.agility);
-        dto.setPronouns(this.pronouns);
-        return dto;
-    }
-
-    public List<Item> getInventory() {
-        return inventory;
-    }
 }

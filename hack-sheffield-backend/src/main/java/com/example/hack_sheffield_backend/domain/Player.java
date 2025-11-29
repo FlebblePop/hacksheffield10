@@ -1,8 +1,7 @@
 package com.example.hack_sheffield_backend.domain;
 
+import com.example.hack_sheffield_backend.dto.PlayerDTO;
 import jakarta.persistence.*;
-
-import java.util.List;
 
 @Entity
 public class Player extends Person {
@@ -22,6 +21,18 @@ public class Player extends Person {
 
     // getters and setters
     public void setPooCounter(int pooCounter) { this.pooCounter = pooCounter; }
+    public void setIntelligence(int intelligence) { this.intelligence = intelligence; }
+    public void setCharisma(int charisma) { this.charisma = charisma; }
 
-    public int getPooCounter() { return pooCounter; }
+    public int getIntelligence() { return this.intelligence; }
+    public int getCharisma() { return this.charisma; }
+    public int getPooCounter() { return this.pooCounter; }
+
+    public PlayerDTO toDto() {
+        PlayerDTO dto = new PlayerDTO();
+        dto.setPooCounter(this.pooCounter);
+        dto.setIntelligence(this.intelligence);
+        dto.setCharisma(this.charisma);
+        return dto;
+    }
 }
