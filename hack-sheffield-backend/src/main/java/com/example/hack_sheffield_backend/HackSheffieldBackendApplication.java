@@ -9,5 +9,4 @@ public class HackSheffieldBackendApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(HackSheffieldBackendApplication.class, args);
 	}
-
 }
