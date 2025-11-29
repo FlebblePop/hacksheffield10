@@ -1,19 +1,19 @@
 package com.example.hack_sheffield_backend.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name="persons")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Person {
     @Id
     private int id;
     private String name;
 
-    @OneToMany(mappedBy = "Item")
+    @OneToMany(mappedBy = "id")
     private List<Item> inventory;
 
     private int money;

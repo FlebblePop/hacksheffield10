@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="players")
 public class Player extends Person {
     private int pooCounter;
     private int intelligence;
