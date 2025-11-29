@@ -1,10 +1,7 @@
 package com.example.hack_sheffield_backend.domain;
 
 import com.example.hack_sheffield_backend.dto.SceneDTO;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.List;
 
@@ -15,6 +12,8 @@ public class Scene {
     private int id;
 
     private String imagePath;
+
+    @OneToMany(mappedBy = "id")
     private List<Character> characters;
 
     public Scene() {}
