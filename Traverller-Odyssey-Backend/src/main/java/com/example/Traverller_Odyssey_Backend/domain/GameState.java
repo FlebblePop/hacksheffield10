@@ -6,6 +6,9 @@ import com.example.Traverller_Odyssey_Backend.domain.Character;
 
 public final class GameState {
 
+    // Create player
+    private static final Player player = new Player("Trotsky");
+
     // Create characters
     private static final Character gemini = new Character("Gemini", "");
     private static final Character chatgpt = new Character("ChatGPT", "");
@@ -27,4 +30,12 @@ public final class GameState {
             new ArrayList<>(Arrays.asList(gemini, chatgpt, rescuer)));
 
     private static Scene currentScene =  scene0;
+
+    public static Player getPlayer() {
+        return player;
+    }
+
+    public static Scene getCurrentScene() {
+        return currentScene;
+    }
 }

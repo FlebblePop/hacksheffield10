@@ -1,16 +1,27 @@
 package com.example.Traverller_Odyssey_Backend.services;
 
-import com.example.Traverller_Odyssey_Backend.domain.Player;
+import com.example.Traverller_Odyssey_Backend.domain.GameState;
 import org.springframework.stereotype.Service;
 
 @Service
 public class GameService {
+
+    public String getIntroText() {
+        return GameState.getCurrentScene().getIntroText();
+    }
+
     public String processInput(String input) {
 
         if (input.contains("poo")) {
-            player.setPooCounter(player.getPooCounter() + 1);
-            return "You have pood. Your Poo Counter has been incremented. It is now: " + player.getPooCounter();
+            GameState.getPlayer().setPooCounter(GameState.getPlayer().getPooCounter() + 1);
+            return "You have pood. Your Poo Counter has been incremented. It is now: "
+                    + GameState.getPlayer().getPooCounter();
         }
+
         return input;
+    }
+
+    public String getImagePath() {
+        return GameState.getCurrentScene().getImagePath();
     }
 }

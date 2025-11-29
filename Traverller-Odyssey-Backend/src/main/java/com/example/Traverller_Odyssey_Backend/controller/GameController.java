@@ -25,19 +25,17 @@ public class GameController {
     }
 
     @GetMapping({"", "/"})
-    public @ResponseBody String getScene() {
-        return "Welcome to the tavern";
+    public @ResponseBody String getIntroText() {
+        return gameService.getIntroText();
     }
 
     @GetMapping("/{input}")
     public @ResponseBody String processInput(@PathVariable String input) {
-        gameService.processInput(input);
-
-        return input;
+        return gameService.processInput(input);
     }
 
     @GetMapping(value = "/image")
-    public @ResponseBody String getImage() {
-        return "tavern.png";
+    public @ResponseBody String getImagePath() {
+        return gameService.getImagePath();
     }
 }
