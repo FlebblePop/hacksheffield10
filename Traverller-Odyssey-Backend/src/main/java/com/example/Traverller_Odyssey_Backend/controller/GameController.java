@@ -12,6 +12,12 @@ public class GameController {
 
     public GameController() {}
 
+    @GetMapping({"", "/"})
+    public ResponseEntity<> getScene() {}
+
     @GetMapping("/{input}")
     public ResponseEntity<> processInput(@PathVariable String input) {}
+
+    @GetMapping("/image")
+    public ResponseEntity<> getImage() {}
 }
