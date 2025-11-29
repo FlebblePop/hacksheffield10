@@ -108,8 +108,4 @@ public abstract class Person {
         dto.setPronouns(this.pronouns);
         return dto;
     }
-
-    public List<Item> getInventory() {
-        return inventory;
-    }
 }
