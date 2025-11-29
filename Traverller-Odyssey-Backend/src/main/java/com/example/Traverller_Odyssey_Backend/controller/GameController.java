@@ -13,7 +13,7 @@ public class GameController {
     public GameController() {}
 
     @GetMapping({"", "/"})
-    public @RequestBody String getScene() {
+    public @ResponseBody String getScene() {
         return "Welcome to the tavern";
     }
 
