@@ -6,19 +6,6 @@ import jakarta.persistence.Id;
 import java.util.List;
 
 @Entity
-public class Character {
-    @Id
-    private int id;
+public class Character extends Person {
 
-    private String name;
-    private List<Item> inventory;
-
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
 }
