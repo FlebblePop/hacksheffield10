@@ -1,6 +1,5 @@
 package com.example.hack_sheffield_backend.controller;
 
-import com.example.hack_sheffield_backend.domain.Player;
 import com.example.hack_sheffield_backend.dto.PlayerDTO;
 import com.example.hack_sheffield_backend.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,4 +23,12 @@ public class PlayerController {
         PlayerDTO createdPlayerDTO = playerService.createPlayer(playerDTO.toEntity()).toDto();
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPlayerDTO);
     }
+
+    @PostMapping("/update")
+    public ResponseEntity<PlayerDTO> updatePlayer(@RequestBody PlayerDTO playerDTO) {
+        PlayerDTO updatedPlayerDTO = playerService.updatePlayer(playerDTO.toEntity()).toDTO();
+        return ResponseEntity.status(HttpStatus.OK).body(updatedPlayerDTO);
+    }
+
+
 }

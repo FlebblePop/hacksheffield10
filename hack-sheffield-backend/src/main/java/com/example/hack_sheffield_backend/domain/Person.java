@@ -11,17 +11,18 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Person {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
 
     @OneToMany(mappedBy = "id")
     private List<Item> inventory;
 
-    private int money;
-    private int hp;
-    private int maxHp;
-    private int strength;
-    private int agility;
+    private Integer money;
+    private Integer hp;
+    private Integer maxHp;
+    private Integer strength;
+    private Integer agility;
 
     @OneToMany(mappedBy = "id")
     private List <Pronouns> pronouns;
@@ -47,19 +48,19 @@ public abstract class Person {
         this.inventory = inventory;
     }
 
-    public void setMoney(int money) {
+    public void setMoney(Integer money) {
         this.money = money;
     }
 
-    public void setHp(int hp) {
+    public void setHp(Integer hp) {
         this.hp = hp;
     }
 
-    public void setStrength(int strength) {
+    public void setStrength(Integer strength) {
         this.strength = strength;
     }
 
-    public void setAgility(int agility) {
+    public void setAgility(Integer agility) {
         this.agility = agility;
     }
 
@@ -67,15 +68,15 @@ public abstract class Person {
         this.pronouns = pronouns;
     }
 
-    public void setMaxHp(int maxHp) {
+    public void setMaxHp(Integer maxHp) {
         this.maxHp = maxHp;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -83,17 +84,17 @@ public abstract class Person {
 
     public List<Item> getInventory() { return inventory; }
 
-    public int getMoney() { return money; }
+    public Integer getMoney() { return money; }
 
-    public int getHp() { return hp; }
+    public Integer getHp() { return hp; }
 
-    public int getStrength() { return strength; }
+    public Integer getStrength() { return strength; }
 
-    public int getAgility() { return agility; }
+    public Integer getAgility() { return agility; }
 
     public List<Pronouns> getPronouns() { return pronouns; }
 
-    public int getMaxHp() { return maxHp; }
+    public Integer getMaxHp() { return maxHp; }
 
     public PersonDTO toDTO() {
         PersonDTO dto = new PersonDTO() {};

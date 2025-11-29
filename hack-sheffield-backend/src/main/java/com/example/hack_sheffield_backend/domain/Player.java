@@ -5,9 +5,9 @@ import jakarta.persistence.*;
 
 @Entity
 public class Player extends Person {
-    private int pooCounter;
-    private int intelligence;
-    private int charisma;
+    private Integer pooCounter;
+    private Integer intelligence;
+    private Integer charisma;
 
     public Player() {}
 
@@ -20,15 +20,15 @@ public class Player extends Person {
     }
 
     // getters and setters
-    public void setPooCounter(int pooCounter) { this.pooCounter = pooCounter; }
-    public void setIntelligence(int intelligence) { this.intelligence = intelligence; }
-    public void setCharisma(int charisma) { this.charisma = charisma; }
+    public void setPooCounter(Integer pooCounter) { this.pooCounter = pooCounter; }
+    public void setIntelligence(Integer intelligence) { this.intelligence = intelligence; }
+    public void setCharisma(Integer charisma) { this.charisma = charisma; }
 
-    public int getIntelligence() { return this.intelligence; }
-    public int getCharisma() { return this.charisma; }
-    public int getPooCounter() { return this.pooCounter; }
+    public Integer getIntelligence() { return this.intelligence; }
+    public Integer getCharisma() { return this.charisma; }
+    public Integer getPooCounter() { return this.pooCounter; }
 
-    public PlayerDTO toDto() {
+    public PlayerDTO toDTO() {
         PlayerDTO dto = new PlayerDTO();
         dto.setPooCounter(this.pooCounter);
         dto.setIntelligence(this.intelligence);

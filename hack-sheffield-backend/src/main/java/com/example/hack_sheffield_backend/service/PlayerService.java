@@ -23,6 +23,41 @@ public class PlayerService {
         return playerRepository.save(player);
     }
 
+    public Player updatePlayer(Player player) {
+        Player currentPlayer = playerRepository.findById(PLAYER_ID).orElse(null);
+        if (currentPlayer != null) {
+            if (player.getName() != null) {
+                currentPlayer.setName(player.getName());
+            }
+            if (player.getCharisma() != null) {
+                currentPlayer.setCharisma(player.getCharisma());
+            }
+            if (player.getPooCounter() != null) {
+                currentPlayer.setCharisma(player.getCharisma());
+            }
+            if (player.getMaxHp() != null) {
+                currentPlayer.setMaxHp(player.getMaxHp());
+            }
+            if (player.getCharisma() != null) {
+                currentPlayer.setCharisma(player.getCharisma());
+            }
+            if (player.getHp() != null) {
+                currentPlayer.setHp(player.getHp());
+            }
+            if (player.getAgility() != null) {
+                currentPlayer.setAgility(player.getAgility());
+            }
+            if (player.getInventory() != null) {
+                currentPlayer.setInventory(player.getInventory());
+            }
+            if (player.getPronouns() != null) {
+                currentPlayer.setPronouns(player.getPronouns());
+            }
+            playerRepository.save(currentPlayer);
+        }
+        return currentPlayer;
+    }
+
     public List<Item> getInventory() {
         return playerRepository.findById(PLAYER_ID).orElseThrow().getInventory();
     }
