@@ -13,10 +13,14 @@ public class GameController {
     public GameController() {}
 
     @GetMapping({"", "/"})
-    public ResponseEntity<> getScene() {}
+    public @ResponseBody String getScene() {
+        return "Welcome to the tavern";
+    }
 
     @GetMapping("/{input}")
-    public ResponseEntity<> processInput(@PathVariable String input) {}
+    public @ResponseBody String processInput(@PathVariable String input) {
+        return input;
+    }
 
     @GetMapping(value = "/image")
     public @ResponseBody String getImage() {
