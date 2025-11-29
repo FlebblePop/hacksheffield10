@@ -1,6 +1,7 @@
 package com.example.hack_sheffield_backend.service;
 
 import com.example.hack_sheffield_backend.domain.Item;
+import com.example.hack_sheffield_backend.domain.Player;
 import com.example.hack_sheffield_backend.repository.PlayerRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,10 @@ public class PlayerService {
 
     public PlayerService(PlayerRepository playerRepository) {
         this.playerRepository = playerRepository;
+    }
+
+    public Player createPlayer(Player player) {
+        return playerRepository.save(player);
     }
 
     public List<Item> getInventory() {
