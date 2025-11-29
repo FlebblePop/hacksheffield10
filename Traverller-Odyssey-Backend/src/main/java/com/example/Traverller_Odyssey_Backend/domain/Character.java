@@ -3,25 +3,45 @@ package com.example.Traverller_Odyssey_Backend.domain;
 import com.example.Traverller_Odyssey_Backend.dto.CharacterDTO;
 import jakarta.persistence.Entity;
 
-@Entity
+import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.messages.AssistantMessage;
+import org.springframework.ai.chat.messages.Message;
+import org.springframework.ai.chat.messages.SystemMessage;
+import org.springframework.ai.chat.messages.UserMessage;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class Character extends Person {
-    private String prompt;
+    private final ChatClient chatClient;
+    private final List<Message> conversation;
 
-    public Character() {}
-
-    public Character(String name, String prompt) {
+    public Character(String name, String prompt, ChatClient.Builder chatClientBuilder) {
         super(name);
 
-        this.prompt = prompt;
+        this.chatClient = chatClientBuilder.build();
+        final String systemMessageString = prompt;
+        this.conversation = new ArrayList<>();
+        final SystemMessage systemMessage = new SystemMessage(systemMessageString);
+        this.conversation.add(systemMessage);
     }
 
-    public String getPrompt() { return this.prompt; }
+    public String getAnswer(String message) {
+        final Message userMessage = new UserMessage(message);
+        this.conversation.add(userMessage);
 
-    public void setPrompt(String prompt) { this.prompt = prompt; }
+        String modelResponse = this.chatClient.prompt()
+                .messages(this.conversation)
+                .call()
+                .content();
+        final Message assistantMessage = new AssistantMessage(modelResponse);
+        this.conversation.add(assistantMessage);
+        return modelResponse;
+    }
 
     public CharacterDTO toDTO() {
         CharacterDTO dto = new CharacterDTO();
-        dto.setPrompt(prompt);
         return dto;
     }
 }
