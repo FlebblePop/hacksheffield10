@@ -2,6 +2,7 @@ package com.example.hack_sheffield_backend.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,10 @@ public abstract class Person {
     @Id
     private int id;
     private String name;
+
+    @OneToMany
     private List<Item> inventory;
+
     private int money;
     private int hp;
     private int maxHp;
