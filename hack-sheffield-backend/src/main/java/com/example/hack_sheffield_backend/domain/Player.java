@@ -2,26 +2,26 @@ package com.example.hack_sheffield_backend.domain;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
-public class Player {
-    @Id
-    private int id;
-    private int hitPoints;
+public class Player extends Person {
     private int pooCounter;
+    private int intelligence;
+    private int charisma;
 
-    private void setPooCounter (int pooCounter) { this.pooCounter = pooCounter; }
+    public Player() {}
 
-    private int getPooCounter() { return pooCounter; }
+    public Player(String name) {
+        super(name);
 
-    private void setHitPoints(int hitPoints) { this.hitPoints = hitPoints; }
-
-    private int getHitPoints() { return hitPoints; }
-
-    public void setId(int id) {
-        this.id = id;
+        this.intelligence = 10;
+        this.charisma = 10;
+        this.pooCounter = 0;
     }
 
-    public int getId() {
-        return id;
-    }
+    // getters and setters
+    public void setPooCounter(int pooCounter) { this.pooCounter = pooCounter; }
+
+    public int getPooCounter() { return pooCounter; }
 }
