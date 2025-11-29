@@ -13,7 +13,9 @@ public class GameController {
     public GameController() {}
 
     @GetMapping({"", "/"})
-    public ResponseEntity<> getScene() {}
+    public @RequestBody String getScene() {
+        return "Welcome to the tavern";
+    }
 
     @GetMapping("/{input}")
     public ResponseEntity<> processInput(@PathVariable String input) {}
