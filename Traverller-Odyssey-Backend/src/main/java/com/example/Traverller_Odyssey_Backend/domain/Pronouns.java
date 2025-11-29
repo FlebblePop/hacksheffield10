@@ -1,4 +1,4 @@
-package com.example.hack_sheffield_backend.domain;
+package com.example.Traverller_Odyssey_Backend.domain;
 
 import jakarta.persistence.*;
 

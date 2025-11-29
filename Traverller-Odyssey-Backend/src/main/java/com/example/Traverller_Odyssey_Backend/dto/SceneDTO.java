@@ -1,6 +1,6 @@
-package com.example.hack_sheffield_backend.dto;
+package com.example.Traverller_Odyssey_Backend.dto;
 
-import com.example.hack_sheffield_backend.domain.Scene;
+import com.example.Traverller_Odyssey_Backend.domain.Scene;
 
 import java.util.List;
 

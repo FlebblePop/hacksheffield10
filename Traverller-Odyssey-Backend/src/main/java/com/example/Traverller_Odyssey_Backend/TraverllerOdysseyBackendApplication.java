@@ -4,8 +4,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import com.example.hack_sheffield_backend.domain.Scene;
-import com.example.hack_sheffield_backend.domain.Character;
+import com.example.Traverller_Odyssey_Backend.domain.Scene;
+import com.example.Traverller_Odyssey_Backend.domain.Character;
 
 import java.util.ArrayList;
 import java.util.Arrays;

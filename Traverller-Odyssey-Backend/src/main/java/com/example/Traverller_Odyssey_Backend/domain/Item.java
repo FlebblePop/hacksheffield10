@@ -1,6 +1,6 @@
-package com.example.hack_sheffield_backend.domain;
+package com.example.Traverller_Odyssey_Backend.domain;
 
-import com.example.hack_sheffield_backend.dto.ItemDTO;
+import com.example.Traverller_Odyssey_Backend.dto.ItemDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;

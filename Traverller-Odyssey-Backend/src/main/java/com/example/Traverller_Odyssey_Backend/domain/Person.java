@@ -1,6 +1,6 @@
-package com.example.hack_sheffield_backend.domain;
+package com.example.Traverller_Odyssey_Backend.domain;
 
-import com.example.hack_sheffield_backend.dto.PersonDTO;
+import com.example.Traverller_Odyssey_Backend.dto.PersonDTO;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;

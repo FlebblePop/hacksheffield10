@@ -1,7 +1,7 @@
-package com.example.hack_sheffield_backend.domain;
+package com.example.Traverller_Odyssey_Backend.domain;
 
-import com.example.hack_sheffield_backend.dto.SceneDTO;
-import com.example.hack_sheffield_backend.domain.Character;
+import com.example.Traverller_Odyssey_Backend.dto.SceneDTO;
+import com.example.Traverller_Odyssey_Backend.domain.Character;
 import jakarta.persistence.*;
 
 import java.util.List;

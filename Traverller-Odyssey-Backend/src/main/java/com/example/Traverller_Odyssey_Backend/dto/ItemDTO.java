@@ -1,7 +1,7 @@
-package com.example.hack_sheffield_backend.dto;
+package com.example.Traverller_Odyssey_Backend.dto;
 
-import com.example.hack_sheffield_backend.domain.Item;
-import com.example.hack_sheffield_backend.domain.Person;
+import com.example.Traverller_Odyssey_Backend.domain.Item;
+import com.example.Traverller_Odyssey_Backend.domain.Person;
 
 
 public class ItemDTO {

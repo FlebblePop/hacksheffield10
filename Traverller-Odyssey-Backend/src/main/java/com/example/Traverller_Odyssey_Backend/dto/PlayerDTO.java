@@ -1,6 +1,6 @@
-package com.example.hack_sheffield_backend.dto;
+package com.example.Traverller_Odyssey_Backend.dto;
 
-import com.example.hack_sheffield_backend.domain.Player;
+import com.example.Traverller_Odyssey_Backend.domain.Player;
 
 public class PlayerDTO extends PersonDTO {
     public PlayerDTO() {}
