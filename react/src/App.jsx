@@ -15,7 +15,7 @@ function App() {
     const request = (url, method, data={}) => axios({
         method,
         url: `${BASE_URL}${url}`,
-        data
+        datagit
     })
 
     const client = {
