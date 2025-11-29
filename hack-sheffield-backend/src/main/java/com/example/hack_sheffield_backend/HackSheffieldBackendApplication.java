@@ -38,7 +38,8 @@ public class HackSheffieldBackendApplication {
             Scene scene1 = new Scene("", new ArrayList<>(Arrays.asList(gemini, chatgpt, boatSeller)));
             Scene scene2 = new Scene("",
                     new ArrayList<>(Arrays.asList(gemini, chatgpt, pirate1, pirate2, pirate3)));
-            Scene scene3 = new Scene("", new ArrayList<>(Arrays.asList(gemini, chatgpt, boatSeller, rescuer)));
+            Scene scene3 = new Scene("", new ArrayList<>(Arrays.asList(gemini, chatgpt)));
+            Scene scene4 = new Scene("", new ArrayList<>(Arrays.asList(gemini, chatgpt, rescuer)));
         };
     }
 }
