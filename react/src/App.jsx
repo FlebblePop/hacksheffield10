@@ -1,9 +1,36 @@
 import { useState } from 'react';
+
+import { Container } from "react-bootstrap";
+import { Routes, useNavigate } from "react-router-dom";
+import axios from "axios";
+
 import './index.css';
 
 function App() {
     const [inputText, setInputText] = useState('');
     const [displayText, setDisplayText] = useState('Welcome! Your text will appear here.');
+    const [scene, setScene] = useState({})
+
+    const BASE_URL = "http://localhost:8080"
+
+    const request = (url, method, data={}) => axios({
+        method,
+        url: `${BASE_URL}${url}`,
+        data
+    })
+
+    const client = {
+        getPlayer: () => request(`/player`, "GET"),
+        updatePlayer: (data) => request(`/player`, "PUT", data),
+
+        getScene: (id) => request(`/scenes/${id}`, "GET"),
+        updateScene: (data, id) => request(`/scenes/${id}`, "PUT", data),
+
+        sendInput: (data) => request("/input???", "POST", data),
+        // .then(() => { client.getPosts() }),
+    };
+
+    const nav = useNavigate();
 
     const handleInputChange = (e) => {
         setInputText(e.target.value);
