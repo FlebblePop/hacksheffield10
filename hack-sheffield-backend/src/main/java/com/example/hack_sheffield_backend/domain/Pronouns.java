@@ -18,11 +18,15 @@ public class Pronouns {
         this.pronoun = pronoun;
     }
 
+    public Person getPerson() { return person; }
+
     public int getId() { return id; }
 
-    public String  getPronoun() { return pronoun; }
+    public String getPronoun() { return pronoun; }
 
     public void setId(int id) { this.id = id; }
 
     public void setPronoun(String pronoun) { this.pronoun = pronoun; }
+
+    public void setPerson(Person person) { this.person = person; }
 }
