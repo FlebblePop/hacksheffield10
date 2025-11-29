@@ -22,6 +22,9 @@ public abstract class Person {
     private int strength;
     private int agility;
 
+    @OneToMany(mappedBy = "id")
+    private List <Pronouns> pronouns;
+
     public Person() {}
 
     public Person(String name) {
