@@ -30,11 +30,11 @@ public class TraverllerOdysseyBackendApplication {
             Character rescuer = new Character("Rescuer", "");
 
             // Create scenes
-            Scene scene1 = new Scene("", new ArrayList<>(Arrays.asList(gemini, chatgpt, boatSeller)));
-            Scene scene2 = new Scene("",
+            Scene scene1 = new Scene("tavern.png", "Welcome to the tavern", new ArrayList<>(Arrays.asList(gemini, chatgpt, boatSeller)));
+            Scene scene2 = new Scene("", "Scene 2",
                     new ArrayList<>(Arrays.asList(gemini, chatgpt, pirate1, pirate2, pirate3)));
-            Scene scene3 = new Scene("", new ArrayList<>(Arrays.asList(gemini, chatgpt)));
-            Scene scene4 = new Scene("", new ArrayList<>(Arrays.asList(gemini, chatgpt, rescuer)));
+            Scene scene3 = new Scene("", "Scene 3", new ArrayList<>(Arrays.asList(gemini, chatgpt)));
+            Scene scene4 = new Scene("", "Scene 4", new ArrayList<>(Arrays.asList(gemini, chatgpt, rescuer)));
         };
     }
 }

@@ -13,14 +13,16 @@ public class Scene {
     private int id;
 
     private String imagePath;
+    private String introText;
 
     @OneToMany(mappedBy = "id")
     private List<Character> characters;
 
     public Scene() {}
 
-    public Scene(String imagePath, List<Character> characters) {
+    public Scene(String imagePath, String introText, List<Character> characters) {
         this.imagePath = imagePath;
+        this.introText = introText;
         this.characters = characters;
     }
 
@@ -38,6 +40,14 @@ public class Scene {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public String getIntroText() {
+        return introText;
+    }
+
+    public void setIntroText(String introText) {
+        this.introText = introText;
     }
 
     public List<Character> getCharacters() {
