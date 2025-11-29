@@ -17,4 +17,12 @@ public class Pronouns {
     public Pronouns(String pronoun, Person person) {
         this.pronoun = pronoun;
     }
+
+    public int getId() { return id; }
+
+    public String  getPronoun() { return pronoun; }
+
+    public void setId(int id) { this.id = id; }
+
+    public void setPronoun(String pronoun) { this.pronoun = pronoun; }
 }
