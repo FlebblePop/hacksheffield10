@@ -44,4 +44,8 @@ public abstract class Person {
     public int getId() {
         return id;
     }
+
+    public List<Item> getInventory() {
+        return inventory;
+    }
 }
