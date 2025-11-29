@@ -18,7 +18,9 @@ public class GameController {
     }
 
     @GetMapping("/{input}")
-    public ResponseEntity<> processInput(@PathVariable String input) {}
+    public @ResponseBody String processInput(@PathVariable String input) {
+        return input;
+    }
 
     @GetMapping(value = "/image")
     public @ResponseBody String getImage() {
