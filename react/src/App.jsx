@@ -1,35 +1,78 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import './index.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [inputText, setInputText] = useState('');
+    const [displayText, setDisplayText] = useState('Welcome! Your text will appear here.');
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    const handleInputChange = (e) => {
+        setInputText(e.target.value);
+    };
+
+    const handleSubmit = () => {
+        if (inputText.trim()) {
+            setDisplayText(inputText);
+            setInputText('');
+        }
+    };
+
+    return (
+        <div className="container">
+            <div className="wrapper">
+                {/* Main Image with Text Overlay */}
+                <div className="image-container">
+                    <div className="image-wrapper">
+                        <img
+                            src=""
+                            alt="Game scene"
+                            className="image"
+                        />
+                    </div>
+
+                    {/* Display Text Bar */}
+                    <div className="text-bar">
+                        <p className="display-text">
+                            {displayText}
+                        </p>
+                    </div>
+                </div>
+
+                {/* Input Text Box with Square Button */}
+                <div className="input-container">
+                    <div className="input-wrapper">
+                        <input
+                            type="text"
+                            value={inputText}
+                            onChange={handleInputChange}
+                            placeholder="Type your message..."
+                            className="input"
+                            onKeyPress={(e) => e.key === 'Enter' && handleSubmit()}
+                        />
+                        <button
+                            onClick={handleSubmit}
+                            className="button"
+                            aria-label="Submit"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="icon"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={3}
+                                    d="M13 7l5 5m0 0l-5 5m5-5H6"
+                                />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 }
 
-export default App
+export default App;
