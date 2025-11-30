@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public abstract class Person {
     private int id;
     private String name;
