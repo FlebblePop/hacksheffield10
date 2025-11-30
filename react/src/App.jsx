@@ -32,7 +32,6 @@ function App() {
         try {
             await client.getInitialText();
             await client.getImage();
-            console.log("Got new scene")
         } catch (error) {
             console.error("Error refreshing scene:", error);
         }
@@ -111,6 +110,7 @@ function App() {
                             onClick={handleSubmit}
                             className="button"
                             aria-label="Submit"
+                            disabled={imagePath === "death_screen"}
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
