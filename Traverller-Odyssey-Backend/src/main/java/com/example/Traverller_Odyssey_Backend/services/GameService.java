@@ -3,6 +3,8 @@ package com.example.Traverller_Odyssey_Backend.services;
 import com.example.Traverller_Odyssey_Backend.controller.GameController;
 import com.example.Traverller_Odyssey_Backend.domain.Character;
 import com.example.Traverller_Odyssey_Backend.domain.GameState;
+import com.example.Traverller_Odyssey_Backend.domain.Pronouns;
+import com.example.Traverller_Odyssey_Backend.domain.Character;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,7 +12,7 @@ import java.util.List;
 @Service
 public class GameService {
 
-    private final GameState gameState = new GameState();
+    public GameState gameState = new GameState();
 
     public String getIntroText() {
         return gameState.getCurrentScene().getIntroText();
@@ -20,10 +22,22 @@ public class GameService {
 
         if (gameState.getCurrentScene().getId() == 0) {
             if (!input.isEmpty()) {
-                gameState.getPlayer().setName(input);
-                gameState.goToNextScene();
+                if (!gameState.nameGiven) {
+                    gameState.getPlayer().setName(input);
+                    gameState.nameGiven = true;
+                    return "Hello " + input + "\nNow set your pronouns! Add them and then type 'done' when finished!";
+                } else {
+                    if (input.equalsIgnoreCase("done")) {
+                        gameState.goToNextScene();
+                        return "[NS]Your pronouns have been set as: " + gameState.getPlayer().getPronouns().toString()
+                                + "\nWelcome to the tavern";
+                    } else {
+                        gameState.getPlayer().addPronouns(new Pronouns(input, gameState.getPlayer()));
+                        System.out.println(gameState.getPlayer().getPronouns());
+                        return "Added " + input + " pronouns! \ntype 'done' when finished!";
+                    }
 
-                return "Hello " + input;
+                }
             } else {
                 return "Please enter your name";
             }
@@ -70,19 +84,22 @@ public class GameService {
                 }
             } else if (input.equals("next scene")) {
                 gameState.goToNextScene();
-                return "New Chapter";
+                return "[NS]New Scene!";
             } else {
                 return "Unrecognised action";
             }
         } else if (gameState.getCurrentScene().getId() == 2) {
-            if (input.isEmpty()) {
-                return "Please enter an action";
-            } else if (input.equals("next scene")) {
-                gameState.goToNextScene();
-
-                return "changing to scene 3";
-            } else {
-                return "Unrecognised action";
+            switch (input) {
+                case "next scene":
+                    gameState.goToNextScene();
+                    return "changing to scene 3";
+                case "attack pirate 1":
+                    List<Character> characters = gameState.getCurrentScene().getCharacters();
+                    return "attacked pirate 1";
+                case "help":
+                    return gameState.getCurrentScene().getIntroText();
+                default:
+                    return "Unrecognised action";
             }
         } else if (gameState.getCurrentScene().getId() == 3) {
             if (input.isEmpty()) {

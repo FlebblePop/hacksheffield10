@@ -28,19 +28,21 @@ public class GameController {
     public @ResponseBody String getIntroText() {
         return gameService.getIntroText();
     }
-
+    
     @GetMapping(value = "/image")
     public @ResponseBody String getImagePath() {
         return gameService.getImagePath();
     }
 
-    @GetMapping("/{input}")
-    public @ResponseBody String processInput(@PathVariable String input) {
+    @GetMapping("/")
+    public @ResponseBody String processInput(@RequestParam String input) {
         String result = gameService.processInput(input);
 
-        if (result.equals("New Chapter")) {
+        if (result.startsWith("[NS]")) {
             notifySceneChange();
+            return result.substring("[NS]".length());
         }
+
         return result;
     }
 
