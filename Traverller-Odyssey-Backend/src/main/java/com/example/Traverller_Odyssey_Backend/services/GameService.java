@@ -66,6 +66,8 @@ public class GameService {
                 return "Please enter an action";
             } else if (Boat && input.equals("leave tavern")) {
                 return "[NS]New Scene!";
+            } else if (input.equals("help")) {
+                return gameState.getCurrentScene().getIntroText();
             } else if (input.equals("death scene")) {
                 return "[DS]You Died";
             } else if (input.startsWith("mary:")) {
@@ -293,6 +295,8 @@ public class GameService {
             }
 
             return "You didn't manage to make an SOS sign, maybe you could find something to help you.";
+        } else if (input.equals("help")) {
+            return gameState.getCurrentScene().getIntroText();
         } else {
             return "Unrecognised action";
         }
