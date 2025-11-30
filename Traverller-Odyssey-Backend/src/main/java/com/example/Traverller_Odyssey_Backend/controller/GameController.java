@@ -39,8 +39,13 @@ public class GameController {
     public @ResponseBody String processInput(@RequestParam String input) {
         String result = gameService.processInput(input);
 
-        if (result.startsWith("[NS]")) {
-            gameService.goToNextScene();
+        if (result.startsWith("[")) {
+            if (result.startsWith("[NS]")) {
+                gameService.goToNextScene();
+            }
+            else if (result.startsWith("[DS]")) {
+                gameService.goToDeathScene();
+            }
             notifySceneChange();
             return result.substring("[NS]".length());
         }

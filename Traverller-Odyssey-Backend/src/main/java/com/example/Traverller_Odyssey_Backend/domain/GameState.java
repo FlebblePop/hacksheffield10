@@ -2,7 +2,6 @@ package com.example.Traverller_Odyssey_Backend.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import com.example.Traverller_Odyssey_Backend.domain.Character;
 
 
 public class GameState {
@@ -34,6 +33,8 @@ public class GameState {
             new ArrayList<>(Arrays.asList(mary, anne, mugsy, rescuer)));
     private final Scene scene5 = new Scene(5, "", "Congratulations! You survived!",
             new ArrayList<>());
+
+    private final Scene deathScene = new Scene(-1, "death_screen", "Unlucky", new ArrayList<>());
 
     private Scene currentScene = scene0;
 
@@ -67,5 +68,9 @@ public class GameState {
                 currentScene = scene5;
                 break;
         }
+    }
+
+    public void goToDeathScene() {
+        currentScene = deathScene;
     }
 }
