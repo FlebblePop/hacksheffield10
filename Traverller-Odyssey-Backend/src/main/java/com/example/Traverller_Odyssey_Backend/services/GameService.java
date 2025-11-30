@@ -6,6 +6,8 @@ import com.example.Traverller_Odyssey_Backend.domain.GameState;
 import com.example.Traverller_Odyssey_Backend.domain.Pronouns;
 import org.springframework.stereotype.Service;
 
+import java.util.Random;
+
 import java.util.List;
 
 @Service
@@ -54,7 +56,7 @@ public class GameService {
         } else if (gameState.getCurrentScene().getId() == 1) {
             if (input.isEmpty()) {
                 return "Please enter an action";
-            } else if (input.contains("mary")) {
+            } else if (input.substring(0, input.indexOf(":")).contains("mary")) {
                 List<Character> characters = gameState.getCurrentScene().getCharacters();
                 for (Character character : characters) {
                     if (character.getName().equals("Mary")) {
@@ -62,21 +64,26 @@ public class GameService {
                         return response.contains("Yes, I would love to join your crew.") ? response + "\n[Mary has joined your crew]" : response;
                     }
                 }
-            } else if (input.contains("anne")) {
+            } else if (input.substring(0, input.indexOf(":")).contains("anne")) {
                 List<Character> characters = gameState.getCurrentScene().getCharacters();
                 for (Character character : characters) {
                     if (character.getName().equals("Anne")) {
                         return character.askOpenAI(input.substring(input.indexOf(":")));
                     }
                 }
-            } else if (input.contains("herk")) {
+            } else if (input.substring(0, input.indexOf(":")).contains("herk")) {
                 List<Character> characters = gameState.getCurrentScene().getCharacters();
                 for (Character character : characters) {
                     if (character.getName().equals("Herk")) {
+                        Random r= new Random();
+                        int r1 = r.nextInt(3);
+                        for (int i = 0; i < r1; i++) {
+
+                        }
                         return character.askOpenAI(input.substring(input.indexOf(":")));
                     }
                 }
-            } else if (input.contains("mugsy")) {
+            } else if (input.substring(0, input.indexOf(":")).contains("mugsy")) {
                 List<Character> characters = gameState.getCurrentScene().getCharacters();
                 for (Character character : characters) {
                     if (character.getName().equals("Mugsy")) {

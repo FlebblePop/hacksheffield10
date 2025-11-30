@@ -29,12 +29,16 @@ public class Character extends Person {
 
         String apiKey = System.getenv("OPENAI_API_KEY");
 
+        this.prompt = prompt;
+
         chatHistory.add(prompt);
 
         this.client = OpenAIOkHttpClient.builder()
                 .apiKey(apiKey)
                 .build();
     }
+
+    public String getPrompt() {return prompt;}
 
     public String askOpenAI(String userMessage) {
 
