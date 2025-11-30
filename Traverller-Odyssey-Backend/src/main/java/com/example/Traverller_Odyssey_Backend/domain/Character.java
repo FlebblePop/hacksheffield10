@@ -17,12 +17,15 @@ import java.util.List;
 
 public class Character extends Person {
 
+    private String name;
     private String prompt;
     private final List<String> chatHistory = new ArrayList<>();
 
     private final OpenAIClient client;
 
-    public Character(String prompt) {
+    public Character(String name, String prompt) {
+        this.name = name;
+
         String apiKey = System.getenv("OPENAI_API_KEY");
 
         chatHistory.add(apiKey);
