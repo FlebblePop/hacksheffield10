@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react';
 
-import { Container } from "react-bootstrap";
-import { Routes, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import './index.css';
 
 function App() {
-    const [imagePath, setImagePath] = useState("");
+    const [imagePath, setImagePath] = useState("waiting");
     const [displayText, setDisplayText] = useState("");
     const [inputText, setInputText] = useState("");
 
@@ -22,11 +20,11 @@ function App() {
 
     const client = {
         getInitialText: () => request("/scene", "GET")
-            .then((response) => { setDisplayText(response.data); }),
+            .then((response) => { setDisplayText(response.data); console.log(response.data)}),
         getImage: () => request("/image", "GET")
-            .then((response) => { setImagePath(response.data); }),
+            .then((response) => { setImagePath(response.data); console.log(response.data)}),
         sendInput: (data) => request("/", "POST", data)
-            .then((response) => { setDisplayText(response.data) }),
+            .then((response) => { setDisplayText(response.data); }),
     };
 
     // Load initial data when component mounts
@@ -64,7 +62,7 @@ function App() {
                 <div className="image-container">
                     <div className="image-wrapper">
                         <img
-                            src={imagePath}
+                            src={`/${imagePath}.png`}
                             alt="Game scene"
                             className="image"
                         />

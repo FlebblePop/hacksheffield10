@@ -8,11 +8,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping({"", "/"})
+@CrossOrigin
 public class GameController {
 
     public GameController() {}
 
-    @GetMapping({"", "/"})
+    @GetMapping({"/scene"})
     public @ResponseBody String getScene() {
         return "Welcome to the tavern";
     }
@@ -24,6 +25,6 @@ public class GameController {
 
     @GetMapping(value = "/image")
     public @ResponseBody String getImage() {
-        return "tavern.png";
+        return "vite";
     }
 }
