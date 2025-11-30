@@ -22,7 +22,8 @@ public class GameState {
 
     // Create scenes
     private final Scene scene0 = new Scene(0, "create_character", "Enter your name", new ArrayList<>());
-    private final Scene scene1 = new Scene(1, "tavern", "Welcome to the tavern",
+    private final Scene scene1 = new Scene(1, "tavern",
+            "Welcome to the tavern. A perfect place to meet potential crewmates and barter for goods.\n\nAvailable actions:\n- mary: (message)\n- anne: (message)\n- herk: (message)\n- mugsy: (message)",
             new ArrayList<>(Arrays.asList(mary, anne, mugsy, herk)));
     private final Scene scene2 = new Scene(2, "pirates",
             "After setting off in your boat, you spot an island in the distance. But before you can think, you encounter a pirate ship. Despite the comical look of the pirates wearing tie-dye t-shirts, they seem vicious and engage in combat.\n\nAvailable actions:\n- Attack pirate 1\n- Attack pirate 2\n- Attack pirate 3\n- Go to the island",
