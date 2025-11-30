@@ -29,19 +29,14 @@ public class GameController {
         return gameService.getIntroText();
     }
 
-<<<<<<< HEAD
     @GetMapping("/")
     public @ResponseBody String processInput(@RequestParam String input) {
-=======
+        return gameService.processInput(input);
+    }
+
     @GetMapping(value = "/image")
     public @ResponseBody String getImagePath() {
         return gameService.getImagePath();
-    }
-
-    @GetMapping("/{input}")
-    public @ResponseBody String processInput(@PathVariable String input) {
->>>>>>> a340d0c5608b6d1d45237c49a8b405d2785a58c9
-        return gameService.processInput(input);
     }
 
     @GetMapping(value = "/scene-updates", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
