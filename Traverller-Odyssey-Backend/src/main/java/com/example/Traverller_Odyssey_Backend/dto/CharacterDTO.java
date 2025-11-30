@@ -13,7 +13,7 @@ public class CharacterDTO extends PersonDTO {
 
     public Character toEntity() {
         Character character = new Character();
-        character.setPrompt(this.prompt);
+        //character.setPrompt(this.prompt);
         return character;
     }
 
