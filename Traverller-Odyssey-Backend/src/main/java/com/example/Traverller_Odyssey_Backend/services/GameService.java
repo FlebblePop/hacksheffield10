@@ -168,21 +168,21 @@ public class GameService {
                 List<Character> characters = gameState.getCurrentScene().getCharacters();
                 for (Character character : characters) {
                     if (character.getName().equals("Pirate1")) {
-                        return character.askOpenAI(input.substring(input.indexOf(":")));
+                        return "Pirate1 " + character.askOpenAI(input.substring(input.indexOf(":")));
                     }
                 }
             } else if (input.startsWith("pirate2")) {
                 List<Character> characters = gameState.getCurrentScene().getCharacters();
                 for (Character character : characters) {
                     if (character.getName().equals("Pirate2")) {
-                        return character.askOpenAI(input.substring(input.indexOf(":")));
+                        return "Pirate2 " + character.askOpenAI(input.substring(input.indexOf(":")));
                     }
                 }
             } else if (input.startsWith("pirate3")) {
                 List<Character> characters = gameState.getCurrentScene().getCharacters();
                 for (Character character : characters) {
                     if (character.getName().equals("Pirate3")) {
-                        return character.askOpenAI(input.substring(input.indexOf(":")));
+                        return "Pirate3 " + character.askOpenAI(input.substring(input.indexOf(":")));
                     }
                 }
             } else {
