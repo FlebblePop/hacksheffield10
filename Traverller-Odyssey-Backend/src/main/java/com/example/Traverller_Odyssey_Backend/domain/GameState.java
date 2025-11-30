@@ -19,7 +19,7 @@ public final class GameState {
     private static final Character rescuer = new Character("Rescuer", "");
 
     // Create scenes
-    private static final Scene scene0 = new Scene(0, "", "Enter your name", new ArrayList<>());
+    private static final Scene scene0 = new Scene(0, "tavern", "Enter your name", new ArrayList<>());
     private static final Scene scene1 = new Scene(1, "tavern.png", "Welcome to the tavern",
             new ArrayList<>(Arrays.asList(gemini, chatgpt, boatSeller)));
     private static final Scene scene2 = new Scene(2, "", "Scene 2",
@@ -31,7 +31,7 @@ public final class GameState {
     private static final Scene scene5 = new Scene(5, "", "Congratulations! You survived!",
             new ArrayList<>());
 
-    private static Scene currentScene =  scene0;
+    private static Scene currentScene = scene0;
 
     public static Player getPlayer() {
         return player;
@@ -41,10 +41,15 @@ public final class GameState {
         return currentScene;
     }
 
+    public static void setCurrentScene(Scene currentScene) {
+        GameState.currentScene = currentScene;
+    }
+
     public static void goToNextScene() {
         switch (currentScene.getId()) {
             case 0:
-                currentScene = scene1;
+                System.out.println("Scene 0");
+                setCurrentScene(scene1);
                 break;
             case 1:
                 currentScene = scene2;
