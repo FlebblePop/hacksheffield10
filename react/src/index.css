@@ -63,8 +63,8 @@ body {
   white-space: pre-wrap;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  line-height: 1.5;
-  max-height: 3em; /* Shows 2 lines (2 × 1.5 line-height) */
+  line-height: 1.2;
+  max-height: 4.8em; /* Shows 4 lines (4 × 1.2 line-height) */
   overflow-y: auto;
   overflow-x: hidden;
   padding-right: 8px;
