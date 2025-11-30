@@ -26,25 +26,35 @@ public class Character extends Person {
         super(name);
 
         String apiKey = System.getenv("OPENAI_API_KEY");
-
-        chatHistory.add(prompt);
-
         this.client = OpenAIOkHttpClient.builder()
                 .apiKey(apiKey)
                 .build();
+
+        chatHistory.add(prompt);
     }
 
     public String askOpenAI(String prompt) {
 
         StringBuilder fullPrompt = new StringBuilder();
-        for (String entry : chatHistory) {
-            fullPrompt.append(entry).append("\n");
+        fullPrompt.append("Your characters background: ");
+        fullPrompt.append(chatHistory.get(0));
+        fullPrompt.append("\nPrevious chat history:\n");
+        for (int i = 1; i < chatHistory.size(); i++) {
+            if ((i & 2) == 0) {
+                fullPrompt.append("Traveller: ");
+            }
+            else {
+                fullPrompt.append("You: ");
+            }
+            fullPrompt.append(i).append("\n");
         }
 
         ResponseCreateParams createParams = ResponseCreateParams.builder()
-                .input(fullPrompt.toString())
-                .model(ChatModel.GPT_5_MINI)
+                .input(prompt)
+                .model(ChatModel.GPT_5)
                 .build();
+
+        System.out.println(fullPrompt.toString());
 
         // StringBuilder to collect all output text
         StringBuilder output = new StringBuilder();
