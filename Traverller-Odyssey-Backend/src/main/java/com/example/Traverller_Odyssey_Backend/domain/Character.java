@@ -17,18 +17,17 @@ import java.util.List;
 
 public class Character extends Person {
 
-    private String name;
     private String prompt;
     private final List<String> chatHistory = new ArrayList<>();
 
     private final OpenAIClient client;
 
     public Character(String name, String prompt) {
-        this.name = name;
+        super(name);
 
         String apiKey = System.getenv("OPENAI_API_KEY");
 
-        chatHistory.add(apiKey);
+        chatHistory.add(prompt);
 
         this.client = OpenAIOkHttpClient.builder()
                 .apiKey(apiKey)
@@ -44,7 +43,7 @@ public class Character extends Person {
 
         ResponseCreateParams createParams = ResponseCreateParams.builder()
                 .input(fullPrompt.toString())
-                .model(ChatModel.GPT_4O)
+                .model(ChatModel.GPT_5_MINI)
                 .build();
 
         // StringBuilder to collect all output text

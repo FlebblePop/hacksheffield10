@@ -1,5 +1,6 @@
 package com.example.Traverller_Odyssey_Backend.services;
 
+import com.example.Traverller_Odyssey_Backend.domain.Character;
 import com.example.Traverller_Odyssey_Backend.domain.GameState;
 import com.example.Traverller_Odyssey_Backend.domain.Character;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,6 @@ public class GameService {
             if (!input.isEmpty()) {
                 gameState.getPlayer().setName(input);
                 gameState.goToNextScene();
-                System.out.println(gameState.getCurrentScene().getId());
 
                 return "Hello " + input;
             } else {
@@ -40,6 +40,34 @@ public class GameService {
         } else if (gameState.getCurrentScene().getId() == 1) {
             if (input.isEmpty()) {
                 return "Please enter an action";
+            } else if (input.contains("mary")) {
+                List<Character> characters = gameState.getCurrentScene().getCharacters();
+                for (Character character : characters) {
+                    if (character.getName().equals("Mary")) {
+                        return character.askOpenAI(input.substring(input.indexOf(":")));
+                    }
+                }
+            } else if (input.contains("anne")) {
+                List<Character> characters = gameState.getCurrentScene().getCharacters();
+                for (Character character : characters) {
+                    if (character.getName().equals("Anne")) {
+                        return character.askOpenAI(input.substring(input.indexOf(":")));
+                    }
+                }
+            } else if (input.contains("herk")) {
+                List<Character> characters = gameState.getCurrentScene().getCharacters();
+                for (Character character : characters) {
+                    if (character.getName().equals("Herk")) {
+                        return character.askOpenAI(input.substring(input.indexOf(":")));
+                    }
+                }
+            } else if (input.contains("mugsy")) {
+                List<Character> characters = gameState.getCurrentScene().getCharacters();
+                for (Character character : characters) {
+                    if (character.getName().equals("Mugsy")) {
+                        return character.askOpenAI(input.substring(input.indexOf(":")));
+                    }
+                }
             } else if (input.equals("next scene")) {
                 gameState.goToNextScene();
 
