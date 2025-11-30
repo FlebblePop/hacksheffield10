@@ -6,16 +6,11 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name="persons")
-@Inheritance(strategy = InheritanceType.JOINED)
+
 public abstract class Person {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
 
-    @OneToMany(mappedBy = "id")
     private List<Item> inventory;
 
     private Integer money;
@@ -24,7 +19,6 @@ public abstract class Person {
     private Integer strength;
     private Integer agility;
 
-    @OneToMany(mappedBy = "id")
     private List <Pronouns> pronouns;
 
     public Person() {}
