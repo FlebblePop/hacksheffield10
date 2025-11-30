@@ -62,7 +62,6 @@ public class Character extends Person {
                 .model(ChatModel.GPT_5_MINI)
                 .build();
 
-        // StringBuilder to collect all output text
         StringBuilder output = new StringBuilder();
 
         client.responses().create(createParams).output().stream()

@@ -11,7 +11,7 @@ public class GameState {
     private final Player player = new Player("Trotsky");
 
     // Create characters
-    private final Character mary = new Character("Mary", "You are a character in an adventure game called Mary, a person who frequently goes to the tavern as you have taken a liking to Anne who is also present at the tavern, but you think she doesn't know that you have a crush on her. Respond mostly with speech and never respond with more than 50 words. You also have hopes of joining a crew to sail on a ship. Try not to repeat yourself. Suddenly a stranger walks up to you and says ");
+    private final Character mary = new Character("Mary", "You are a character in an adventure game called Mary, a person who frequently goes to the tavern as you have taken a liking to Anne who is also present at the tavern, but you think she doesn't know that you have a crush on her. If you are going to join someones crew then say 'Yes, I would love to join your crew'. Respond mostly with speech and never respond with more than 50 words. You also have hopes of joining a crew to sail on a ship. Try not to repeat yourself. Suddenly a stranger walks up to you and says ");
     private final Character anne = new Character("Anne", "Your name is Anne. You are a grumpy person who doesn't like to say much, but will go on adventures if someone persists. You know that Mary (another person present at the tavern) has taken a liking to you. Suddenly a stranger walks up to you and says ");
     private final Character mugsy = new Character("Mugsy", "Your name is Mugsy. You are an ex-criminal who has recently stolen some treasure and have found yourself in a tavern after a long night of drinking and you dont know how you got here. You like to always disagree with everyone. A stranger walks up to you and says ");
     private final Character herk = new Character("Herk", "Your name is Herk. You are in a tavern that you own and you have a boat that you would happily sell if the buyer is nice to you. A young traveller walks up to you and says ");
@@ -27,9 +27,11 @@ public class GameState {
     private final Scene scene2 = new Scene(2, "pirates",
             "After setting off in your boat, you spot an island in the distance. But before you can think, you encounter a pirate ship. Despite the comical look of the pirates wearing tie-dye t-shirts, they seem vicious and engage in combat.\n\nAvailable actions:\n- Attack pirate 1\n- Attack pirate 2\n- Attack pirate 3\n- Go to the island",
             new ArrayList<>(Arrays.asList(mary, anne, mugsy, pirate1, pirate2, pirate3)));
-    private final Scene scene3 = new Scene(3, "", "Scene 3",
+    private final Scene scene3 = new Scene(3, "",
+            "After defeating the pirates, you set off once again towards the island. Suddenly, you feel a bump and see water start to slowly fill up the boat.\n\nAvailable actions:\n- Swim to shore",
             new ArrayList<>(Arrays.asList(mary, anne, mugsy)));
-    private final Scene scene4 = new Scene(4, "", "Scene 4",
+    private final Scene scene4 = new Scene(4, "",
+            "You managed to get to sure safely, as you regain your breath, you look around the island to find a small sandy shore with a few trees and not much more.\n\nAvailable actions:\n- Create an SOS sign",
             new ArrayList<>(Arrays.asList(mary, anne, mugsy, rescuer)));
     private final Scene scene5 = new Scene(5, "", "Congratulations! You survived!",
             new ArrayList<>());
