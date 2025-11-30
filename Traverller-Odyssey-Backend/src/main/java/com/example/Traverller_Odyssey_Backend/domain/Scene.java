@@ -9,7 +9,6 @@ import java.util.List;
 @Entity
 public class Scene {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String imagePath;
@@ -20,7 +19,7 @@ public class Scene {
 
     public Scene() {}
 
-    public Scene(String imagePath, String introText, List<Character> characters) {
+    public Scene(int id, String imagePath, String introText, List<Character> characters) {
         this.imagePath = imagePath;
         this.introText = introText;
         this.characters = characters;

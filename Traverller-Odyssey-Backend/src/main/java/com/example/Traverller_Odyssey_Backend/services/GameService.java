@@ -12,6 +12,15 @@ public class GameService {
 
     public String processInput(String input) {
 
+        if (GameState.getCurrentScene().getId() == 0) {
+            if (!input.isEmpty()) {
+                GameState.getPlayer().setName(input);
+                GameState.goToNextScene();
+            } else {
+                return "Please enter your name";
+            }
+        }
+
         if (input.contains("poo")) {
             GameState.getPlayer().setPooCounter(GameState.getPlayer().getPooCounter() + 1);
             return "You have pood. Your Poo Counter has been incremented. It is now: "

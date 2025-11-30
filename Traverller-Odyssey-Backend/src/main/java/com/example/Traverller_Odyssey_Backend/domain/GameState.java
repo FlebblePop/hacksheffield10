@@ -19,15 +19,17 @@ public final class GameState {
     private static final Character rescuer = new Character("Rescuer", "");
 
     // Create scenes
-    private static final Scene scene0 = new Scene("", "Enter your name", new ArrayList<>());
-    private static final Scene scene1 = new Scene("tavern.png", "Welcome to the tavern",
+    private static final Scene scene0 = new Scene(0, "", "Enter your name", new ArrayList<>());
+    private static final Scene scene1 = new Scene(1, "tavern.png", "Welcome to the tavern",
             new ArrayList<>(Arrays.asList(gemini, chatgpt, boatSeller)));
-    private static final Scene scene2 = new Scene("", "Scene 2",
+    private static final Scene scene2 = new Scene(2, "", "Scene 2",
             new ArrayList<>(Arrays.asList(gemini, chatgpt, pirate1, pirate2, pirate3)));
-    private static final Scene scene3 = new Scene("", "Scene 3",
+    private static final Scene scene3 = new Scene(3, "", "Scene 3",
             new ArrayList<>(Arrays.asList(gemini, chatgpt)));
-    private static final Scene scene4 = new Scene("", "Scene 4",
+    private static final Scene scene4 = new Scene(4, "", "Scene 4",
             new ArrayList<>(Arrays.asList(gemini, chatgpt, rescuer)));
+    private static final Scene scene5 = new Scene(5, "", "Congratulations! You survived!",
+            new ArrayList<>());
 
     private static Scene currentScene =  scene0;
 
@@ -37,5 +39,24 @@ public final class GameState {
 
     public static Scene getCurrentScene() {
         return currentScene;
+    }
+
+    public static void goToNextScene() {
+        switch (currentScene.getId()) {
+            case 0:
+                currentScene = scene1;
+                break;
+            case 1:
+                currentScene = scene2;
+                break;
+            case 2:
+                currentScene = scene3;
+                break;
+            case 3:
+                currentScene = scene4;
+                break;
+            case 4:
+                currentScene = scene5;
+        }
     }
 }
