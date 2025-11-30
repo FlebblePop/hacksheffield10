@@ -26,18 +26,18 @@ public abstract class PersonDTO {
 
     private List <Pronouns> pronouns;
 
-    public Person toEntity(String name) {
-        Person person = new Person() {};
-        person.setName(name);
-        person.setInventory(inventory);
-        person.setMoney(money);
-        person.setHp(hp);
-        person.setMaxHp(maxHp);
-        person.setStrength(strength);
-        person.setAgility(agility);
-        person.setPronouns(pronouns);
-        return  person;
-    }
+//    public Person toEntity(String name) {
+//        Person person = new Person() {};
+//        person.setName(name);
+//        person.setInventory(inventory);
+//        person.setMoney(money);
+//        person.setHp(hp);
+//        person.setMaxHp(maxHp);
+//        person.setStrength(strength);
+//        person.setAgility(agility);
+//        person.setPronouns(pronouns);
+//        return  person;
+//    }
 
     public void setName(String name) {
         this.name = name;
