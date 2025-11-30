@@ -61,14 +61,15 @@ public class GameService {
                 for (Character character : characters) {
                     if (character.getName().equals("Mary")) {
                         String response = character.askOpenAI(input.substring(input.indexOf(":")));
-                        return response.contains("Yes, I would love to join your crew.") ? response + "\n[Mary has joined your crew]" : response;
+                        return response.contains("Yes, I would love to join your crew.") ?
+                                "Mary: " + response + "\n[Mary has joined your crew]" : "Mary: " + response;
                     }
                 }
             } else if (input.substring(0, input.indexOf(":")).contains("anne")) {
                 List<Character> characters = gameState.getCurrentScene().getCharacters();
                 for (Character character : characters) {
                     if (character.getName().equals("Anne")) {
-                        return character.askOpenAI(input.substring(input.indexOf(":")));
+                        return "Anne: " + character.askOpenAI(input.substring(input.indexOf(":")));
                     }
                 }
             } else if (input.substring(0, input.indexOf(":")).contains("herk")) {
@@ -80,14 +81,14 @@ public class GameService {
                         for (int i = 0; i < r1; i++) {
 
                         }
-                        return character.askOpenAI(input.substring(input.indexOf(":")));
+                        return "Herk: " + character.askOpenAI(input.substring(input.indexOf(":")));
                     }
                 }
             } else if (input.substring(0, input.indexOf(":")).contains("mugsy")) {
                 List<Character> characters = gameState.getCurrentScene().getCharacters();
                 for (Character character : characters) {
                     if (character.getName().equals("Mugsy")) {
-                        return character.askOpenAI(input.substring(input.indexOf(":")));
+                        return "Mugsy: " + character.askOpenAI(input.substring(input.indexOf(":")));
                     }
                 }
             } else if (input.equals("next scene")) {

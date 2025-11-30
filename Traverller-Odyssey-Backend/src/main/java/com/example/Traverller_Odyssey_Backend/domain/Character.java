@@ -85,6 +85,9 @@ public class Character extends Person {
         }
 
         // Return the complete output as a single string
+        if (assistantReply.contains(":") && assistantReply.contains(getName())) {
+            assistantReply = assistantReply.substring(assistantReply.indexOf(":") + 1);
+        }
         return assistantReply;
     }
 

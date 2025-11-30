@@ -6,11 +6,13 @@ import './index.css';
 
 function App() {
     const [imagePath, setImagePath] = useState("waiting");
+    const [characterImgPath, setCharacterImgPath] = useState("none")
     const [displayText, setDisplayText] = useState("");
     const [inputText, setInputText] = useState("");
 
-
     const BASE_URL = "http://localhost:8080"
+
+    const characters = ["Mary", "Anne", "Herk", "Mugsy"]
 
     const request = (url, method, data={}) => axios({
         method,
@@ -24,7 +26,18 @@ function App() {
         getImage: () => request("/image", "GET")
             .then((response) => { setImagePath(response.data); }),
         getResponse: (data) => request("/?input="+data, "GET")
-            .then((response) => { setDisplayText(response.data); }),
+            .then((response) => {
+                setDisplayText(response.data);
+
+                setCharacterImgPath("none");
+                for (const name of characters) {
+                    if (response.data.startsWith(name)) {
+                        console.log(name + " detected")
+                        setCharacterImgPath(name)
+                    }
+                }
+                console.log("Set: " + characterImgPath)
+            }),
     };
 
     // Function to refresh scene data
@@ -80,11 +93,24 @@ function App() {
                 {/* Main Image with Text Overlay */}
                 <div className="image-container">
                     <div className="image-wrapper">
+                        {/* Main image */}
                         <img
                             src={`/${imagePath}.png`}
                             alt="Game scene"
-                            className="image"
+                            className={ characterImgPath !== "none" ?
+                                "image blurred" :
+                                "image"
+                            }
                         />
+                        {/* Overlay image in bottom left corner */}
+                        { characterImgPath !== "none" ?
+                            <img
+                                src={`/Characters/${characterImgPath}.png`}
+                                alt="Overlay"
+                                className="overlay-image"
+                            />
+                            : null }
+
                     </div>
 
                     {/* Display Text Bar */}
