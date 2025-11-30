@@ -34,6 +34,10 @@ public abstract class Person {
         this.pronouns = new ArrayList<>();
     }
 
+    public void addPronouns(Pronouns pronouns) {
+        this.pronouns.add(pronouns);
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -86,7 +90,7 @@ public abstract class Person {
 
     public Integer getAgility() { return agility; }
 
-    public List<Pronouns> getPronouns() { return pronouns; }
+    public List<Pronouns> getPronouns() { return pronouns.stream().toList(); }
 
     public Integer getMaxHp() { return maxHp; }
 

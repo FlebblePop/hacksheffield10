@@ -2,10 +2,13 @@ package com.example.Traverller_Odyssey_Backend.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
 import com.example.Traverller_Odyssey_Backend.domain.Character;
 
 public class GameState {
-
+    // Has the name been given?
+    public Boolean nameGiven = false;
     // Create player
     private final Player player = new Player("Trotsky");
 

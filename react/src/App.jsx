@@ -23,7 +23,7 @@ function App() {
             .then((response) => { setDisplayText(response.data); }),
         getImage: () => request("/image", "GET")
             .then((response) => { setImagePath(response.data); }),
-        getResponse: (data) => request("/"+data, "GET")
+        getResponse: (data) => request("/?input="+data, "GET")
             .then((response) => { setDisplayText(response.data); }),
     };
 

@@ -30,8 +30,8 @@ public class GameController {
         return gameService.getIntroText();
     }
 
-    @GetMapping("/{input}")
-    public @ResponseBody String processInput(@PathVariable String input) {
+    @GetMapping("/")
+    public @ResponseBody String processInput(@RequestParam String input) {
         return gameService.processInput(input);
     }
 
