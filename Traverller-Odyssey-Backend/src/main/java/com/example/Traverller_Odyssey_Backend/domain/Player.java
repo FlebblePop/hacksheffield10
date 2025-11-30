@@ -1,8 +1,5 @@
 package com.example.Traverller_Odyssey_Backend.domain;
 
-import com.example.Traverller_Odyssey_Backend.dto.PlayerDTO;
-import jakarta.persistence.*;
-
 public class Player extends Person {
     private Integer pooCounter;
     private Integer intelligence;
@@ -26,12 +23,4 @@ public class Player extends Person {
     public Integer getIntelligence() { return this.intelligence; }
     public Integer getCharisma() { return this.charisma; }
     public Integer getPooCounter() { return this.pooCounter; }
-
-    public PlayerDTO toDTO() {
-        PlayerDTO dto = new PlayerDTO();
-        dto.setPooCounter(this.pooCounter);
-        dto.setIntelligence(this.intelligence);
-        dto.setCharisma(this.charisma);
-        return dto;
-    }
 }

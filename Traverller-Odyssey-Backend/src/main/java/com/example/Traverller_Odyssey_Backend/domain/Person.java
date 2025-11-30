@@ -1,6 +1,5 @@
 package com.example.Traverller_Odyssey_Backend.domain;
 
-import com.example.Traverller_Odyssey_Backend.dto.PersonDTO;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -96,18 +95,4 @@ public abstract class Person {
     public void addItemToInventory(String item) {
         this.inventory.add(item);
     }
-
-//    public PersonDTO toDTO() {
-//        PersonDTO dto = new PersonDTO() {};
-//        dto.setId(this.id);
-//        dto.setName(this.name);
-//        dto.setInventory(this.inventory);
-//        dto.setMoney(this.money);
-//        dto.setHp(this.hp);
-//        dto.setMaxHp(this.maxHp);
-//        dto.setStrength(this.strength);
-//        dto.setAgility(this.agility);
-//        dto.setPronouns(this.pronouns);
-//        return dto;
-//    }
 }
