@@ -74,6 +74,9 @@ function App() {
 
     return (
         <div className="container">
+            <div className="title">
+                <h1>Travellers Odyssey</h1>
+            </div>
             <div className="wrapper">
                 {/* Main Image with Text Overlay */}
                 <div className="image-container">
