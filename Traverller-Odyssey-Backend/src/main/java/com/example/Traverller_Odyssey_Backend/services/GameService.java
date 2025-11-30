@@ -94,13 +94,7 @@ public class GameService {
         } else if (gameState.getCurrentScene().getId() == 3) {
             return handleScene3Input(input);
         } else if (gameState.getCurrentScene().getId() == 4) {
-            if (input.isEmpty()) {
-                return "Please enter an action";
-            } else if (input.equals("next scene")) {
-                return "[NS]Changing to scene 5";
-            } else {
-                return "Unrecognised action";
-            }
+            return handleScene4Input(input);
         }
 
         return input;
@@ -164,6 +158,8 @@ public class GameService {
                 }
 
                 return "not all the pirates are dead";
+            case "next":
+                return "[NS]New Scene!";
             case "help":
                 return gameState.getCurrentScene().getIntroText();
             default:
@@ -176,6 +172,16 @@ public class GameService {
             return "[NS]You made it to the shore";
         } else if (input.equals("help")) {
             return gameState.getCurrentScene().getIntroText();
+        } else {
+            return "Unrecognised action";
+        }
+    }
+
+    public String handleScene4Input(String input) {
+        if (input.isEmpty()) {
+            return "Please enter an action";
+        } else if (input.equals("create an sos sign")) {
+            return "[NS]After making a large SOS on the shore, it caught the attention of a passing boat. The captan welcomed you aboard and brought you back to te mainland.";
         } else {
             return "Unrecognised action";
         }

@@ -30,7 +30,8 @@ public class GameState {
     private final Scene scene3 = new Scene(3, "",
             "After defeating the pirates, you set off once again towards the island. Suddenly, you feel a bump and see water start to slowly fill up the boat.\n\nAvailable actions:\n- Swim to shore",
             new ArrayList<>(Arrays.asList(mary, anne, mugsy)));
-    private final Scene scene4 = new Scene(4, "", "Scene 4",
+    private final Scene scene4 = new Scene(4, "",
+            "You managed to get to sure safely, as you regain your breath, you look around the island to find a small sandy shore with a few trees and not much more.\n\nAvailable actions:\n- Create an SOS sign",
             new ArrayList<>(Arrays.asList(mary, anne, mugsy, rescuer)));
     private final Scene scene5 = new Scene(5, "", "Congratulations! You survived!",
             new ArrayList<>());
