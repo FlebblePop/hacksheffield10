@@ -1,7 +1,5 @@
 package com.example.Traverller_Odyssey_Backend.domain;
 
-import jakarta.persistence.*;
-
 public class Pronouns {
     int  id;
     String pronoun;

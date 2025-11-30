@@ -15,6 +15,11 @@ public class GameService {
 
     public GameState gameState = new GameState();
 
+    private boolean Mary = false;
+    private boolean Anne = false;
+    private boolean Mugsy = false;
+    private boolean Boat = false;
+
     public String getIntroText() {
         return gameState.getCurrentScene().getIntroText();
     }
@@ -22,6 +27,8 @@ public class GameService {
     public String processInput(String input) {
 
         Player player = gameState.getPlayer();
+
+        input = input.toLowerCase();
 
         if (gameState.getCurrentScene().getId() == 0) {
             if (!input.isEmpty()) {
@@ -50,60 +57,152 @@ public class GameService {
                         "If you do, there'll be a special easter egg! Im waiting. Im waiting for more poo.";
             } else if (player.getPooCounter() == 100) {
                 return "Why have you pood that much. I never asked you to do that. That's too much poo.";
+            } else {
+                return "You have pood. Your Poo Counter has been incremented. It is now: "
+                        + player.getPooCounter();
             }
-            return "You have pood. Your Poo Counter has been incremented. It is now: "
-                    + player.getPooCounter();
         } else if (gameState.getCurrentScene().getId() == 1) {
             if (input.isEmpty()) {
                 return "Please enter an action";
-            } else if (input.substring(0, input.indexOf(":")).contains("mary")) {
+            } else if (input.equals("leave tavern")) {
+                if (Boat) {
+                    return "[NS]New Scene!";
+                }
+
+                return "I need some sort of transport to leave the tavern";
+            } else if (input.equals("help")) {
+                return gameState.getCurrentScene().getIntroText();
+            } else if (input.equals("death scene")) {
+                return "[DS]You Died";
+            } else if (input.startsWith("mary:")) {
                 List<Character> characters = gameState.getCurrentScene().getCharacters();
                 for (Character character : characters) {
                     if (character.getName().equals("Mary")) {
-                        String response = character.askOpenAI(input.substring(input.indexOf(":")));
-                        return response.contains("Yes, I would love to join your crew.") ?
-                                "Mary: " + response + "\n[Mary has joined your crew]" : "Mary: " + response;
+                        String response = "Mary: " + character.askOpenAI(input.substring(input.indexOf(":")));
+                        if (response.contains("Yes, I would love to join your crew.")) {
+                            Mary = true;
+                            return response + "\n[Mary has joined your crew]";
+                        }
+                        return response;
                     }
                 }
-            } else if (input.substring(0, input.indexOf(":")).contains("anne")) {
+            } else if (input.startsWith("anne:")) {
                 List<Character> characters = gameState.getCurrentScene().getCharacters();
                 for (Character character : characters) {
                     if (character.getName().equals("Anne")) {
-                        return "Anne: " + character.askOpenAI(input.substring(input.indexOf(":")));
+                        String response = "Anne: " + character.askOpenAI(input.substring(input.indexOf(":")));
+                        if (response.contains("Yes, I would love to join your crew.")) {
+                            Anne = true;
+                            return response + "\n[Anne has joined your crew]";
+                        }
+                        return response;
                     }
                 }
-            } else if (input.substring(0, input.indexOf(":")).contains("herk")) {
+            } else if (input.startsWith("herk:")) {
                 List<Character> characters = gameState.getCurrentScene().getCharacters();
                 for (Character character : characters) {
                     if (character.getName().equals("Herk")) {
                         Random r= new Random();
                         int r1 = r.nextInt(3);
-                        for (int i = 0; i < r1; i++) {
-
+                        String extra="";
+                        String response = character.askOpenAI(input.substring(input.indexOf(":")));
+                        String talkToNPC = character.askOpenAI("You notice that " + characters.get(r1).getName() + "is looking at you");
+                        if (response.contains("Okay, you can have my boat")) {
+                            Boat = true;
+                            response += "\n[You have acquired a boat]";
                         }
-                        return "Herk: " + character.askOpenAI(input.substring(input.indexOf(":")));
+                        for (int i = 0; i < r1; i++) {
+                            if (characters.get(i).getName().equals("Mary")) {
+                                extra = "Mary: " + characters.get(i).askOpenAI("Herk, the local tavern owner told you " + talkToNPC);
+                            }
+                            if (characters.get(i).getName().equals("Anne")) {
+                                extra = "Anne: " + characters.get(i).askOpenAI("Herk, the local tavern owner told you " + talkToNPC);
+                            }
+                            if (characters.get(i).getName().equals("Mugsy")) {
+                                extra = "Mugsy" + characters.get(i).askOpenAI("Herk, the local tavern owner told you " + talkToNPC);
+                            }
+                        }
+                        return "Herk: " + response + "\n" + talkToNPC + "\n\n" + extra;
                     }
                 }
-            } else if (input.substring(0, input.indexOf(":")).contains("mugsy")) {
+            } else if (input.startsWith("mugsy")) {
                 List<Character> characters = gameState.getCurrentScene().getCharacters();
                 for (Character character : characters) {
                     if (character.getName().equals("Mugsy")) {
-                        return "Mugsy: " + character.askOpenAI(input.substring(input.indexOf(":")));
+                        String response = "Mugsy: " + character.askOpenAI(input.substring(input.indexOf(":")));
+                        if (response.contains("Yes, I would love to join your crew.")) {
+                            Mugsy = true;
+                            return response + "\n[Mugsy has joined your crew]";
+                        }
+                        return response;
                     }
                 }
-            } else if (input.equals("next scene")) {
-                return "[NS]New Scene!";
-            } else if (input.equals("death scene")) {
-                    return "[DS]You Died";
             } else {
                 return "Unrecognised action";
             }
         } else if (gameState.getCurrentScene().getId() == 2) {
-            return handleScene2Input(input);
+            if (input.isEmpty()) {
+                return "Please enter an action";
+            } else if (Mary && (input.startsWith("mary"))) {
+                List<Character> characters = gameState.getCurrentScene().getCharacters();
+                for (Character character : characters) {
+                    if (character.getName().equals("Mary")) {
+                        return character.askOpenAI("You are on a boat and pirates are nearby. " + input.substring(input.indexOf(":")));
+                    }
+                }
+            } else if (Anne && (input.startsWith("anne"))) {
+                List<Character> characters = gameState.getCurrentScene().getCharacters();
+                for (Character character : characters) {
+                    if (character.getName().equals("Anne")) {
+                        return character.askOpenAI("You are now on a boat and pirates are nearby. " + input.substring(input.indexOf(":")));
+                    }
+                }
+            } else if (Mugsy && (input.startsWith("mugsy"))) {
+                List<Character> characters = gameState.getCurrentScene().getCharacters();
+                for (Character character : characters) {
+                    if (character.getName().equals("Mugsy")) {
+                        return character.askOpenAI("You are on a boat and pirates are nearby. " + input.substring(input.indexOf(":")));
+                    }
+                }
+            } else if (input.startsWith("pirate1")) {
+                List<Character> characters = gameState.getCurrentScene().getCharacters();
+                for (Character character : characters) {
+                    if (character.getName().equals("Pirate1")) {
+                        return character.askOpenAI(input.substring(input.indexOf(":")));
+                    }
+                }
+            } else if (input.startsWith("pirate2")) {
+                List<Character> characters = gameState.getCurrentScene().getCharacters();
+                for (Character character : characters) {
+                    if (character.getName().equals("Pirate2")) {
+                        return character.askOpenAI(input.substring(input.indexOf(":")));
+                    }
+                }
+            } else if (input.startsWith("pirate3")) {
+                List<Character> characters = gameState.getCurrentScene().getCharacters();
+                for (Character character : characters) {
+                    if (character.getName().equals("Pirate3")) {
+                        return character.askOpenAI(input.substring(input.indexOf(":")));
+                    }
+                }
+            } else {
+                return handleScene2Input(input);
+            }
         } else if (gameState.getCurrentScene().getId() == 3) {
             return handleScene3Input(input);
         } else if (gameState.getCurrentScene().getId() == 4) {
-            return handleScene4Input(input);
+            if (input.isEmpty()) {
+                return "Please enter an action";
+            } else if (input.startsWith("rescuer")) {
+                List<Character> characters = gameState.getCurrentScene().getCharacters();
+                for (Character character : characters) {
+                    if (character.getName().equals("Rescuer")) {
+                        return "Hubert: " + character.askOpenAI(input.substring(input.indexOf(":")));
+                    }
+                }
+            } else {
+                return handleScene4Input(input);
+            }
         }
 
         return input;
@@ -187,10 +286,21 @@ public class GameService {
     }
 
     public String handleScene4Input(String input) {
-        if (input.isEmpty()) {
-            return "Please enter an action";
+        Player player = gameState.getPlayer();
+
+        if (input.equals("gather resources")) {
+            player.addItemToInventory("sticks");
+
+            return "You searched beneath the trees and found some sticks";
         } else if (input.equals("create an sos sign")) {
-            return "[NS]After making a large SOS on the shore, it caught the attention of a passing boat. The captan welcomed you aboard and brought you back to te mainland.";
+
+            if (player.getInventory().contains("sticks")) {
+                return "[NS]After making a large SOS on the shore using the sticks you found, it caught the attention of a passing boat. The captan welcomed you aboard and brought you back to te mainland.";
+            }
+
+            return "You didn't manage to make an SOS sign, maybe you could find something to help you.";
+        } else if (input.equals("help")) {
+            return gameState.getCurrentScene().getIntroText();
         } else {
             return "Unrecognised action";
         }

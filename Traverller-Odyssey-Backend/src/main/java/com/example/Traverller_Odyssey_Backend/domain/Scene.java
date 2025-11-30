@@ -1,11 +1,6 @@
 package com.example.Traverller_Odyssey_Backend.domain;
 
-import com.example.Traverller_Odyssey_Backend.dto.SceneDTO;
-import com.example.Traverller_Odyssey_Backend.domain.Character;
-import jakarta.persistence.*;
-
 import java.util.List;
-
 
 public class Scene {
     private int id;
@@ -54,14 +49,5 @@ public class Scene {
 
     public void setCharacters(List<Character> characters) {
         this.characters = characters;
-    }
-
-    public SceneDTO toDto() {
-        SceneDTO sceneDto = new SceneDTO();
-
-        sceneDto.setId(this.id);
-        sceneDto.setImagePath(this.imagePath);
-
-        return sceneDto;
     }
 }

@@ -1,6 +1,5 @@
 package com.example.Traverller_Odyssey_Backend.domain;
 
-import com.example.Traverller_Odyssey_Backend.dto.PersonDTO;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -10,13 +9,10 @@ public abstract class Person {
     private int id;
     private String name;
 
-    private List<Item> inventory;
+    private List<String> inventory;
 
-    private Integer money;
     private Integer hp;
     private Integer maxHp;
-    private Integer strength;
-    private Integer agility;
 
     private List <Pronouns> pronouns;
 
@@ -25,11 +21,8 @@ public abstract class Person {
     public Person(String name) {
         this.name = name;
         this.inventory = new ArrayList<>();
-        this.money = 0;
         this.maxHp = 20;
         this.hp = this.maxHp;
-        this.strength = 10;
-        this.agility = 10;
         this.pronouns = new ArrayList<>();
     }
 
@@ -41,24 +34,12 @@ public abstract class Person {
         this.name = name;
     }
 
-    public void setInventory(List<Item> inventory) {
+    public void setInventory(List<String> inventory) {
         this.inventory = inventory;
-    }
-
-    public void setMoney(Integer money) {
-        this.money = money;
     }
 
     public void setHp(Integer hp) {
         this.hp = hp;
-    }
-
-    public void setStrength(Integer strength) {
-        this.strength = strength;
-    }
-
-    public void setAgility(Integer agility) {
-        this.agility = agility;
     }
 
     public void setPronouns(List<Pronouns> pronouns) {
@@ -79,31 +60,15 @@ public abstract class Person {
 
     public String getName() { return name; }
 
-    public List<Item> getInventory() { return inventory; }
-
-    public Integer getMoney() { return money; }
+    public List<String> getInventory() { return inventory; }
 
     public Integer getHp() { return hp; }
-
-    public Integer getStrength() { return strength; }
-
-    public Integer getAgility() { return agility; }
 
     public List<Pronouns> getPronouns() { return pronouns.stream().toList(); }
 
     public Integer getMaxHp() { return maxHp; }
 
-    public PersonDTO toDTO() {
-        PersonDTO dto = new PersonDTO() {};
-        dto.setId(this.id);
-        dto.setName(this.name);
-        dto.setInventory(this.inventory);
-        dto.setMoney(this.money);
-        dto.setHp(this.hp);
-        dto.setMaxHp(this.maxHp);
-        dto.setStrength(this.strength);
-        dto.setAgility(this.agility);
-        dto.setPronouns(this.pronouns);
-        return dto;
+    public void addItemToInventory(String item) {
+        this.inventory.add(item);
     }
 }

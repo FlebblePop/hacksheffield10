@@ -1,14 +1,8 @@
 package com.example.Traverller_Odyssey_Backend.domain;
 
-import com.example.Traverller_Odyssey_Backend.dto.CharacterDTO;
-import jakarta.persistence.Entity;
-
 import com.openai.client.OpenAIClient;
 import com.openai.client.okhttp.OpenAIOkHttpClient;
-import com.openai.models.chat.completions.ChatCompletionCreateParams;
-import com.openai.models.chat.completions.ChatCompletion;
 import com.openai.models.ChatModel;
-import com.openai.models.responses.Response;
 import com.openai.models.responses.ResponseCreateParams;
 
 import java.util.ArrayList;
@@ -108,11 +102,6 @@ public class Character extends Person {
         }
 
         System.out.println(combined.toString());
-    }
-
-    public CharacterDTO toDTO() {
-        CharacterDTO dto = new CharacterDTO();
-        return dto;
     }
 
     // Lightweight inner message class for role/content
