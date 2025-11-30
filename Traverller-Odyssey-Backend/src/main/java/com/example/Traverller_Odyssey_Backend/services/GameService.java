@@ -76,13 +76,44 @@ public class GameService {
                 return "Unrecognised action";
             }
         } else if (gameState.getCurrentScene().getId() == 2) {
+            String[] input_words = input.split(" ");
+
+            if (input_words.length == 3 && input_words[0].equals("attack") && input_words[1].equals("pirate")
+                    && (input_words[2].equals("1") || input_words[2].equals("2") || input_words[2].equals("3"))) {
+                List<Character> characters = gameState.getCurrentScene().getCharacters();
+                for (Character character : characters) {
+                    if (character.getName().toLowerCase().equals(input_words[1] + input_words[2])) {
+                        if (character.getHp() <= 0) {
+                            return character.getName() + " is already dead";
+                        }
+
+                        int damage = (int)(Math.random() * 8);
+                        character.setHp(character.getHp() - damage);
+
+                        if (character.getHp() <= 0) {
+                            return "You killed " + character.getName();
+                        }
+                        return "You dealt " + damage + " damage to " + character.getName();
+                    }
+                }
+            }
+
             switch (input) {
-                case "next scene":
-                    gameState.goToNextScene();
-                    return "changing to scene 3";
-                case "attack pirate 1":
-                    List<Character> characters = gameState.getCurrentScene().getCharacters();
-                    return "attacked pirate 1";
+                case "go to the island":
+                    boolean killedAllPirates = true;
+
+                    for (Character character : gameState.getCurrentScene().getCharacters()) {
+                        if (character.getName().contains("Pirate") && character.getHp() > 0) {
+                            killedAllPirates = false;
+                        }
+                    }
+
+                    if (killedAllPirates) {
+                        gameState.goToNextScene();
+                        return "changing to scene 3";
+                    }
+
+                    return "not all the pirates are dead";
                 case "help":
                     return gameState.getCurrentScene().getIntroText();
                 default:

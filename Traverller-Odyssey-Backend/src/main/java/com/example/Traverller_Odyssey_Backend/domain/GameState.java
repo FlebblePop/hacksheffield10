@@ -22,7 +22,7 @@ public class GameState {
     private final Scene scene0 = new Scene(0, "tavern", "Enter your name", new ArrayList<>());
     private final Scene scene1 = new Scene(1, "tavern.png", "Welcome to the tavern",
             new ArrayList<>(Arrays.asList(mary, anne, mugsy, herk)));
-    private final Scene scene2 = new Scene(2, "", "Scene 2",
+    private final Scene scene2 = new Scene(2, "pirates", "Scene 2",
             new ArrayList<>(Arrays.asList(mary, anne, mugsy, pirate1, pirate2, pirate3)));
     private final Scene scene3 = new Scene(3, "", "Scene 3",
             new ArrayList<>(Arrays.asList(mary, anne, mugsy)));
