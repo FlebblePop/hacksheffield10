@@ -1,5 +1,6 @@
 package com.example.Traverller_Odyssey_Backend.controller;
 
+import com.example.Traverller_Odyssey_Backend.domain.GameState;
 import com.example.Traverller_Odyssey_Backend.services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -29,14 +30,22 @@ public class GameController {
         return gameService.getIntroText();
     }
 
-    @GetMapping("/")
-    public @ResponseBody String processInput(@RequestParam String input) {
-        return gameService.processInput(input);
-    }
-
     @GetMapping(value = "/image")
     public @ResponseBody String getImagePath() {
         return gameService.getImagePath();
+    }
+
+    @GetMapping("/")
+    public @ResponseBody String processInput(@RequestParam String input) {
+        String result = gameService.processInput(input);
+
+        if (result.startsWith("[NS]")) {
+            gameService.goToNextScene();
+            notifySceneChange();
+            return result.substring("[NS]".length());
+        }
+
+        return result;
     }
 
     @GetMapping(value = "/scene-updates", produces = MediaType.TEXT_EVENT_STREAM_VALUE)

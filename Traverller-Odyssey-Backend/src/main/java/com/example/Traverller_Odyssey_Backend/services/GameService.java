@@ -1,6 +1,10 @@
 package com.example.Traverller_Odyssey_Backend.services;
 
 import com.example.Traverller_Odyssey_Backend.domain.*;
+import com.example.Traverller_Odyssey_Backend.controller.GameController;
+import com.example.Traverller_Odyssey_Backend.domain.Character;
+import com.example.Traverller_Odyssey_Backend.domain.GameState;
+import com.example.Traverller_Odyssey_Backend.domain.Pronouns;
 import com.example.Traverller_Odyssey_Backend.domain.Character;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +31,7 @@ public class GameService {
                     return "Hello " + input + "\nNow set your pronouns! Add them and then type 'done' when finished!";
                 } else {
                     if (input.equalsIgnoreCase("done")) {
-                        gameState.goToNextScene();
-                        return "Your pronouns have been set as: " + gameState.getPlayer().getPronouns().toString()
+                        return "[NS]Your pronouns have been set as: " + gameState.getPlayer().getPronouns().toString()
                                 + "\nWelcome to the tavern";
                     } else {
                         gameState.getPlayer().addPronouns(new Pronouns(input, gameState.getPlayer()));
@@ -82,9 +85,7 @@ public class GameService {
                     }
                 }
             } else if (input.equals("next scene")) {
-                gameState.goToNextScene();
-
-                return "changing to scene 2";
+                return "[NS]New Scene!";
             } else {
                 return "Unrecognised action";
             }
@@ -139,8 +140,7 @@ public class GameService {
                     }
 
                     if (killedAllPirates) {
-                        gameState.goToNextScene();
-                        return "changing to scene 3";
+                        return "[NS]Changing to scene 3";
                     }
 
                     return "not all the pirates are dead";
@@ -153,9 +153,7 @@ public class GameService {
             if (input.isEmpty()) {
                 return "Please enter an action";
             } else if (input.equals("next scene")) {
-                gameState.goToNextScene();
-
-                return "changing to scene 4";
+                return "[NS]Changing to scene 4";
             } else {
                 return "Unrecognised action";
             }
@@ -163,9 +161,7 @@ public class GameService {
             if (input.isEmpty()) {
                 return "Please enter an action";
             } else if (input.equals("next scene")) {
-                gameState.goToNextScene();
-
-                return "changing to scene 5";
+                return "[NS]Changing to scene 5";
             } else {
                 return "Unrecognised action";
             }
@@ -176,5 +172,9 @@ public class GameService {
 
     public String getImagePath() {
         return gameState.getCurrentScene().getImagePath();
+    }
+
+    public void goToNextScene() {
+        gameState.goToNextScene();
     }
 }
