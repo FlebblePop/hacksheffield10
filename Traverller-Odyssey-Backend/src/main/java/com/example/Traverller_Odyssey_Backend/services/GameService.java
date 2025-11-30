@@ -1,8 +1,6 @@
 package com.example.Traverller_Odyssey_Backend.services;
 
-import com.example.Traverller_Odyssey_Backend.domain.Character;
-import com.example.Traverller_Odyssey_Backend.domain.GameState;
-import com.example.Traverller_Odyssey_Backend.domain.Pronouns;
+import com.example.Traverller_Odyssey_Backend.domain.*;
 import com.example.Traverller_Odyssey_Backend.domain.Character;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +16,8 @@ public class GameService {
     }
 
     public String processInput(String input) {
+
+        Player player = gameState.getPlayer();
 
         if (gameState.getCurrentScene().getId() == 0) {
             if (!input.isEmpty()) {
@@ -100,13 +100,30 @@ public class GameService {
                             return character.getName() + " is already dead";
                         }
 
-                        int damage = (int)(Math.random() * 6 + 4);
-                        character.setHp(character.getHp() - damage);
+                        int playerDamage = (int)(Math.random() * 6 + 4);
+                        character.setHp(character.getHp() - playerDamage);
+
+                        int pirateDamage = 0;
+
+                        for (Character c : gameState.getCurrentScene().getCharacters()) {
+                            if (c.getName().contains("Pirate") && c.getHp() > 0) {
+                                pirateDamage += (int)(Math.random() * 3);
+                            }
+                        }
+
+                        player.setHp(player.getHp() - pirateDamage);
+                        String pirateDamageString;
+
+                        if (player.getHp() <= 0) {
+                            pirateDamageString = "\n\nThe pirates killed you.";
+                        } else {
+                            pirateDamageString = "\n\nThe pirates did " + pirateDamage + " damage to you.";
+                        }
 
                         if (character.getHp() <= 0) {
-                            return "You killed " + character.getName();
+                            return "You killed " + character.getName() + pirateDamageString;
                         }
-                        return "You dealt " + damage + " damage to " + character.getName();
+                        return "You dealt " + playerDamage + " damage to " + character.getName() + pirateDamageString;
                     }
                 }
             }

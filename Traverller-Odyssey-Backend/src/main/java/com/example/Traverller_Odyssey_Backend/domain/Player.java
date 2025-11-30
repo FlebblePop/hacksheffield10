@@ -13,6 +13,8 @@ public class Player extends Person {
     public Player(String name) {
         super(name);
 
+        this.setMaxHp(40);
+        this.setHp(40);
         this.intelligence = 10;
         this.charisma = 10;
         this.pooCounter = 0;

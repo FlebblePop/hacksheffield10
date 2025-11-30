@@ -25,7 +25,8 @@ public class GameState {
     private final Scene scene0 = new Scene(0, "tavern", "Enter your name", new ArrayList<>());
     private final Scene scene1 = new Scene(1, "tavern.png", "Welcome to the tavern",
             new ArrayList<>(Arrays.asList(mary, anne, mugsy, herk)));
-    private final Scene scene2 = new Scene(2, "pirates", "Scene 2",
+    private final Scene scene2 = new Scene(2, "pirates",
+            "After setting off in your boat, you spot an island in the distance. But before you can think, you encounter a pirate ship. Despite the comical look of the pirates wearing tie-dye t-shirts, they seem vicious and engage in combat.\n\nAvailable actions:\n- Attack pirate 1\n- Attack pirate 2\n- Attack pirate 3\n- Go to the island",
             new ArrayList<>(Arrays.asList(mary, anne, mugsy, pirate1, pirate2, pirate3)));
     private final Scene scene3 = new Scene(3, "", "Scene 3",
             new ArrayList<>(Arrays.asList(mary, anne, mugsy)));
