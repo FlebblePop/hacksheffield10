@@ -3,41 +3,63 @@ package com.example.Traverller_Odyssey_Backend.domain;
 import com.example.Traverller_Odyssey_Backend.dto.CharacterDTO;
 import jakarta.persistence.Entity;
 
-import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.messages.AssistantMessage;
-import org.springframework.ai.chat.messages.Message;
-import org.springframework.ai.chat.messages.SystemMessage;
-import org.springframework.ai.chat.messages.UserMessage;
+import com.openai.client.OpenAIClient;
+import com.openai.client.okhttp.OpenAIOkHttpClient;
+import com.openai.models.chat.completions.ChatCompletionCreateParams;
+import com.openai.models.chat.completions.ChatCompletion;
+import com.openai.models.ChatModel;
+import com.openai.models.responses.Response;
+import com.openai.models.responses.ResponseCreateParams;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class Character extends Person {
-    private final ChatClient chatClient;
-    private final List<Message> conversation;
 
-    public Character(String name, String prompt, ChatClient.Builder chatClientBuilder) {
-        super(name);
+    private String prompt;
+    private final List<String> chatHistory = new ArrayList<>();
 
-        this.chatClient = chatClientBuilder.build();
-        final String systemMessageString = prompt;
-        this.conversation = new ArrayList<>();
-        final SystemMessage systemMessage = new SystemMessage(systemMessageString);
-        this.conversation.add(systemMessage);
+    private final OpenAIClient client;
+
+    public Character(String prompt) {
+        String apiKey = System.getenv("OPENAI_API_KEY");
+
+        chatHistory.add(apiKey);
+
+        this.client = OpenAIOkHttpClient.builder()
+                .apiKey(apiKey)
+                .build();
     }
 
-    public String getAnswer(String message) {
-        final Message userMessage = new UserMessage(message);
-        this.conversation.add(userMessage);
+    public String askOpenAI(String prompt) {
 
-        String modelResponse = this.chatClient.prompt()
-                .messages(this.conversation)
-                .call()
-                .content();
-        final Message assistantMessage = new AssistantMessage(modelResponse);
-        this.conversation.add(assistantMessage);
-        return modelResponse;
+        StringBuilder fullPrompt = new StringBuilder();
+        for (String entry : chatHistory) {
+            fullPrompt.append(entry).append("\n");
+        }
+
+        ResponseCreateParams createParams = ResponseCreateParams.builder()
+                .input(fullPrompt.toString())
+                .model(ChatModel.GPT_4O)
+                .build();
+
+        // StringBuilder to collect all output text
+        StringBuilder output = new StringBuilder();
+
+        client.responses().create(createParams).output().stream()
+                .flatMap(item -> item.message().stream())
+                .flatMap(message -> message.content().stream())
+                .flatMap(content -> content.outputText().stream())
+                .forEach(outputText -> {
+                    String text = outputText.text();
+
+                    // Append text for returning
+                    output.append(text);
+                });
+
+        // Return the complete output as a single string
+        return output.toString();
     }
 
     public CharacterDTO toDTO() {
