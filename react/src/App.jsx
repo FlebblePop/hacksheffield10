@@ -12,7 +12,7 @@ function App() {
 
     const BASE_URL = "http://localhost:8080"
 
-    const characters = ["Mary", "Anne", "Herk", "Mugsy"]
+    const characters = ["Mary", "Anne", "Herk", "Mugsy", "Pirate1", "Pirate2", "Pirate3"]
 
     const request = (url, method, data={}) => axios({
         method,
