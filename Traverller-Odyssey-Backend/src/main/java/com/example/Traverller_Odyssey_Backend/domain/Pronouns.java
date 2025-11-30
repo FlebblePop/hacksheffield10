@@ -2,14 +2,10 @@ package com.example.Traverller_Odyssey_Backend.domain;
 
 import jakarta.persistence.*;
 
-@Entity
 public class Pronouns {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int  id;
     String pronoun;
 
-    @ManyToOne
     Person person;
 
     public Pronouns() {}
