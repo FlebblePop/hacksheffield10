@@ -87,7 +87,7 @@ public class GameService {
                             return character.getName() + " is already dead";
                         }
 
-                        int damage = (int)(Math.random() * 8);
+                        int damage = (int)(Math.random() * 6 + 4);
                         character.setHp(character.getHp() - damage);
 
                         if (character.getHp() <= 0) {
