@@ -1,7 +1,10 @@
 package com.example.Traverller_Odyssey_Backend.services;
 
 import com.example.Traverller_Odyssey_Backend.domain.GameState;
+import com.example.Traverller_Odyssey_Backend.domain.Character;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class GameService {
@@ -49,6 +52,9 @@ public class GameService {
                 case "next scene":
                     gameState.goToNextScene();
                     return "changing to scene 3";
+                case "attack pirate 1":
+                    List<Character> characters = gameState.getCurrentScene().getCharacters();
+                    return "attacked pirate 1";
                 case "help":
                     return gameState.getCurrentScene().getIntroText();
                 default:

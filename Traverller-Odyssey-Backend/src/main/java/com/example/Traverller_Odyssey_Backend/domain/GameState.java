@@ -22,7 +22,8 @@ public class GameState {
     private final Scene scene0 = new Scene(0, "tavern", "Enter your name", new ArrayList<>());
     private final Scene scene1 = new Scene(1, "tavern", "Welcome to the tavern",
             new ArrayList<>(Arrays.asList(gemini, chatgpt, boatSeller)));
-    private final Scene scene2 = new Scene(2, "pirates", "Actions:\n- ",
+    private final Scene scene2 = new Scene(2, "pirates",
+            "Actions:\n- Attack pirate 1\n- Attack pirate 2\n- Attack pirate 3",
             new ArrayList<>(Arrays.asList(gemini, chatgpt, pirate1, pirate2, pirate3)));
     private final Scene scene3 = new Scene(3, "", "Scene 3",
             new ArrayList<>(Arrays.asList(gemini, chatgpt)));
