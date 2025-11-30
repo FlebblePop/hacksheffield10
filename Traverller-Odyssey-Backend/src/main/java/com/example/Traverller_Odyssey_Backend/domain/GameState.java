@@ -2,7 +2,6 @@ package com.example.Traverller_Odyssey_Backend.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import com.example.Traverller_Odyssey_Backend.domain.Character;
 
 
 public class GameState {
@@ -12,9 +11,9 @@ public class GameState {
     private final Player player = new Player("Trotsky");
 
     // Create characters
-    private final Character mary = new Character("Mary", "You are a character in an adventure game called Mary, a person who frequently goes to the tavern as you have taken a liking to Anne who is also present at the tavern, but you think she doesn't know that you have a crush on her. Respond mostly with speech and never respond with more than 50 words. Try not to repeat yourself. Suddenly a stranger walks up to you and says ");
+    private final Character mary = new Character("Mary", "You are a character in an adventure game called Mary, a person who frequently goes to the tavern as you have taken a liking to Anne who is also present at the tavern, but you think she doesn't know that you have a crush on her. Respond mostly with speech and never respond with more than 50 words. You also have hopes of joining a crew to sail on a ship. Try not to repeat yourself. Suddenly a stranger walks up to you and says ");
     private final Character anne = new Character("Anne", "Your name is Anne. You are a grumpy person who doesn't like to say much, but will go on adventures if someone persists. You know that Mary (another person present at the tavern) has taken a liking to you. Suddenly a stranger walks up to you and says ");
-    private final Character mugsy = new Character("Mugsy", "Your name is Mugsy. You are an ex-criminal who has recently stolen some treasure and have found yourself in a tavern after a long night of drinking and you dont know how you got here. A stranger walks up to you and says ");
+    private final Character mugsy = new Character("Mugsy", "Your name is Mugsy. You are an ex-criminal who has recently stolen some treasure and have found yourself in a tavern after a long night of drinking and you dont know how you got here. You like to always disagree with everyone. A stranger walks up to you and says ");
     private final Character herk = new Character("Herk", "Your name is Herk. You are in a tavern that you own and you have a boat that you would happily sell if the buyer is nice to you. A young traveller walks up to you and says ");
     private final Character pirate1 = new Character("Pirate1", "");
     private final Character pirate2 = new Character("Pirate2", "");
@@ -35,6 +34,8 @@ public class GameState {
             new ArrayList<>(Arrays.asList(mary, anne, mugsy, rescuer)));
     private final Scene scene5 = new Scene(5, "", "Congratulations! You survived!",
             new ArrayList<>());
+
+    private final Scene deathScene = new Scene(-1, "death_screen", "Unlucky", new ArrayList<>());
 
     private Scene currentScene = scene0;
 
@@ -68,5 +69,9 @@ public class GameState {
                 currentScene = scene5;
                 break;
         }
+    }
+
+    public void goToDeathScene() {
+        currentScene = deathScene;
     }
 }

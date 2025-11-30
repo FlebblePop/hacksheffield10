@@ -1,11 +1,9 @@
 package com.example.Traverller_Odyssey_Backend.services;
 
 import com.example.Traverller_Odyssey_Backend.domain.*;
-import com.example.Traverller_Odyssey_Backend.controller.GameController;
 import com.example.Traverller_Odyssey_Backend.domain.Character;
 import com.example.Traverller_Odyssey_Backend.domain.GameState;
 import com.example.Traverller_Odyssey_Backend.domain.Pronouns;
-import com.example.Traverller_Odyssey_Backend.domain.Character;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -86,6 +84,8 @@ public class GameService {
                 }
             } else if (input.equals("next scene")) {
                 return "[NS]New Scene!";
+            } else if (input.equals("death scene")) {
+                    return "[DS]You Died";
             } else {
                 return "Unrecognised action";
             }
@@ -136,7 +136,7 @@ public class GameService {
                     System.out.println(player.getHp());
 
                     if (player.getHp() <= 0) {
-                        pirateDamageString = "\n\nThe pirates killed you.";
+                        return "[DS]The pirates killed you.";
                     } else {
                         pirateDamageString = "\n\nThe pirates did " + pirateDamage + " damage to you.";
                     }
@@ -187,5 +187,9 @@ public class GameService {
 
     public void goToNextScene() {
         gameState.goToNextScene();
+    }
+
+    public void goToDeathScene() {
+        gameState.goToDeathScene();
     }
 }
