@@ -174,9 +174,7 @@ public class GameService {
                         return character.askOpenAI(input.substring(input.indexOf(":")));
                     }
                 }
-            } else if (input.equals("next scene")) {
-                return "[NS]New Scene!";
-            }else {
+            } else {
                 return handleScene2Input(input);
             }
         } else if (gameState.getCurrentScene().getId() == 3) {
