@@ -39,14 +39,14 @@ public class GameService {
                 return "Unrecognised action";
             }
         } else if (gameState.getCurrentScene().getId() == 2) {
-            if (input.isEmpty()) {
-                return "Please enter an action";
-            } else if (input.equals("next scene")) {
-                gameState.goToNextScene();
-
-                return "changing to scene 3";
-            } else {
-                return "Unrecognised action";
+            switch (input) {
+                case "next scene":
+                    gameState.goToNextScene();
+                    return "changing to scene 3";
+                case "help":
+                    return gameState.getCurrentScene().getIntroText();
+                default:
+                    return "Unrecognised action";
             }
         } else if (gameState.getCurrentScene().getId() == 3) {
             if (input.isEmpty()) {
