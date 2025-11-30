@@ -36,7 +36,12 @@ public class GameController {
 
     @GetMapping("/{input}")
     public @ResponseBody String processInput(@PathVariable String input) {
-        return gameService.processInput(input);
+        String result = gameService.processInput(input);
+
+        if (result.equals("New Chapter")) {
+            notifySceneChange();
+        }
+        return result;
     }
 
     @GetMapping(value = "/scene-updates", produces = MediaType.TEXT_EVENT_STREAM_VALUE)

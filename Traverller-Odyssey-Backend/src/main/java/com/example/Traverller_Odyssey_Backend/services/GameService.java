@@ -1,5 +1,6 @@
 package com.example.Traverller_Odyssey_Backend.services;
 
+import com.example.Traverller_Odyssey_Backend.controller.GameController;
 import com.example.Traverller_Odyssey_Backend.domain.Character;
 import com.example.Traverller_Odyssey_Backend.domain.GameState;
 import org.springframework.stereotype.Service;
@@ -69,8 +70,7 @@ public class GameService {
                 }
             } else if (input.equals("next scene")) {
                 gameState.goToNextScene();
-
-                return "changing to scene 2";
+                return "New Chapter";
             } else {
                 return "Unrecognised action";
             }
