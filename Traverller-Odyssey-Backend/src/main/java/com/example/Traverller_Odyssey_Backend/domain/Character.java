@@ -21,42 +21,55 @@ public class Character extends Person {
 
     private final OpenAIClient client;
 
+    private final List<String> chatHistory = new ArrayList<>();
+
+
     public Character(String name, String prompt) {
         super(name);
 
         String apiKey = System.getenv("OPENAI_API_KEY");
 
-        this.prompt = prompt;
+        chatHistory.add(prompt);
 
         this.client = OpenAIOkHttpClient.builder()
                 .apiKey(apiKey)
                 .build();
     }
 
-    public String askOpenAI(String prompt) {
+    public String askOpenAI(String userMessage) {
 
+        // Append user message to history
+        chatHistory.add("User: " + userMessage);
+
+        // Build the full conversation string
+        StringBuilder fullPrompt = new StringBuilder(userMessage);
+
+        for (String msg : chatHistory) {
+            fullPrompt.append(msg).append("\n");
+        }
+
+        // Build request
         ResponseCreateParams createParams = ResponseCreateParams.builder()
-                .input(this.prompt + prompt)
+                .input(fullPrompt.toString())
                 .model(ChatModel.GPT_5_MINI)
                 .build();
 
-        // StringBuilder to collect all output text
         StringBuilder output = new StringBuilder();
 
         client.responses().create(createParams).output().stream()
                 .flatMap(item -> item.message().stream())
                 .flatMap(message -> message.content().stream())
                 .flatMap(content -> content.outputText().stream())
-                .forEach(outputText -> {
-                    String text = outputText.text();
+                .forEach(outputText -> output.append(outputText.text()));
 
-                    // Append text for returning
-                    output.append(text);
-                });
+        // Store the AI response
+        String aiReply = output.toString();
+        chatHistory.add("AI: " + aiReply);
 
-        // Return the complete output as a single string
-        return output.toString();
+        System.out.println(aiReply);
+        return aiReply;
     }
+
 
     public CharacterDTO toDTO() {
         CharacterDTO dto = new CharacterDTO();

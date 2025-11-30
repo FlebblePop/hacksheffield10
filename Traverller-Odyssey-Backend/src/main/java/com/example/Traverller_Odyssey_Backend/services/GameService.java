@@ -58,7 +58,8 @@ public class GameService {
                 List<Character> characters = gameState.getCurrentScene().getCharacters();
                 for (Character character : characters) {
                     if (character.getName().equals("Mary")) {
-                        return character.askOpenAI(input.substring(input.indexOf(":")));
+                        String response = character.askOpenAI(input.substring(input.indexOf(":")));
+                        return response.contains("Yes, I would love to join your crew.") ? response + "\n[Mary has joined your crew]" : response;
                     }
                 }
             } else if (input.contains("anne")) {
