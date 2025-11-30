@@ -61,7 +61,7 @@ public class Character extends Person {
         // Build request
         ResponseCreateParams createParams = ResponseCreateParams.builder()
                 .input(combined.toString())
-                .model(ChatModel.GPT_5_MINI)
+                .model(ChatModel.GPT_5_NANO)
                 .build();
 
         StringBuilder output = new StringBuilder();
