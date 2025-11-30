@@ -18,6 +18,7 @@ public class Scene {
     public Scene() {}
 
     public Scene(int id, String imagePath, String introText, List<Character> characters) {
+        this.id = id;
         this.imagePath = imagePath;
         this.introText = introText;
         this.characters = characters;
