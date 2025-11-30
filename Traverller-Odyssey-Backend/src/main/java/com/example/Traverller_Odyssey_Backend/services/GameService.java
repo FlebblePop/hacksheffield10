@@ -54,8 +54,8 @@ public class GameService {
             return "You have pood. Your Poo Counter has been incremented. It is now: "
                     + player.getPooCounter();
         } else if (gameState.getCurrentScene().getId() == 1) {
-            if (input.isEmpty()) {
-                return "Please enter an action";
+            if (input.equals("next scene")) {
+                return "[NS]New Scene!";
             } else if (input.substring(0, input.indexOf(":")).contains("mary")) {
                 List<Character> characters = gameState.getCurrentScene().getCharacters();
                 for (Character character : characters) {
@@ -186,10 +186,19 @@ public class GameService {
     }
 
     public String handleScene4Input(String input) {
-        if (input.isEmpty()) {
-            return "Please enter an action";
+        Player player = gameState.getPlayer();
+
+        if (input.equals("gather resources")) {
+            player.addItemToInventory("sticks");
+
+            return "You searched beneath the trees and found some sticks";
         } else if (input.equals("create an sos sign")) {
-            return "[NS]After making a large SOS on the shore, it caught the attention of a passing boat. The captan welcomed you aboard and brought you back to te mainland.";
+
+            if (player.getInventory().contains("sticks")) {
+                return "[NS]After making a large SOS on the shore using the sticks you found, it caught the attention of a passing boat. The captan welcomed you aboard and brought you back to te mainland.";
+            }
+
+            return "You didn't manage to make an SOS sign, maybe you could find something to help you.";
         } else {
             return "Unrecognised action";
         }

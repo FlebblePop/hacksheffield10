@@ -29,11 +29,11 @@ public class ItemDTO {
 
     public Person getPerson() { return this.person; }
 
-    public Item toEntity(){
-        Item item = new Item();
-        item.setId(this.id);
-        item.setName(this.name);
-        item.setPerson(this.person);
-        return item;
-    }
+//    public Item toEntity(){
+//        Item item = new Item();
+//        item.setId(this.id);
+//        item.setName(this.name);
+//        item.setPerson(this.person);
+//        return item;
+//    }
 }

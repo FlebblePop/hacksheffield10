@@ -10,7 +10,7 @@ public abstract class Person {
     private int id;
     private String name;
 
-    private List<Item> inventory;
+    private List<String> inventory;
 
     private Integer money;
     private Integer hp;
@@ -41,7 +41,7 @@ public abstract class Person {
         this.name = name;
     }
 
-    public void setInventory(List<Item> inventory) {
+    public void setInventory(List<String> inventory) {
         this.inventory = inventory;
     }
 
@@ -79,7 +79,7 @@ public abstract class Person {
 
     public String getName() { return name; }
 
-    public List<Item> getInventory() { return inventory; }
+    public List<String> getInventory() { return inventory; }
 
     public Integer getMoney() { return money; }
 
@@ -93,17 +93,21 @@ public abstract class Person {
 
     public Integer getMaxHp() { return maxHp; }
 
-    public PersonDTO toDTO() {
-        PersonDTO dto = new PersonDTO() {};
-        dto.setId(this.id);
-        dto.setName(this.name);
-        dto.setInventory(this.inventory);
-        dto.setMoney(this.money);
-        dto.setHp(this.hp);
-        dto.setMaxHp(this.maxHp);
-        dto.setStrength(this.strength);
-        dto.setAgility(this.agility);
-        dto.setPronouns(this.pronouns);
-        return dto;
+    public void addItemToInventory(String item) {
+        this.inventory.add(item);
     }
+
+//    public PersonDTO toDTO() {
+//        PersonDTO dto = new PersonDTO() {};
+//        dto.setId(this.id);
+//        dto.setName(this.name);
+//        dto.setInventory(this.inventory);
+//        dto.setMoney(this.money);
+//        dto.setHp(this.hp);
+//        dto.setMaxHp(this.maxHp);
+//        dto.setStrength(this.strength);
+//        dto.setAgility(this.agility);
+//        dto.setPronouns(this.pronouns);
+//        return dto;
+//    }
 }

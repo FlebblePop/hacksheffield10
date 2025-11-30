@@ -11,9 +11,7 @@ public class Item {
 
     private String name;
 
-    private Person person;
-
-    public void setPerson(Person person) { this.person = person; }
+    public Item(int id, String name) {}
 
     public void setId(int id) {
         this.id = id;
@@ -26,15 +24,4 @@ public class Item {
     }
 
     public String getName() { return name; }
-
-    public Person getPerson() { return this.person; }
-
-    public ItemDTO toDto() {
-        ItemDTO dto = new ItemDTO();
-        dto.setId(this.id);
-        dto.setName(this.name);
-        dto.setPerson(this.person);
-        return dto;
-    }
-
 }
