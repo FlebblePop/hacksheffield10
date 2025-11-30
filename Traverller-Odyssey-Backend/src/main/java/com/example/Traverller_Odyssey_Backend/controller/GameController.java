@@ -1,5 +1,6 @@
 package com.example.Traverller_Odyssey_Backend.controller;
 
+import com.example.Traverller_Odyssey_Backend.domain.GameState;
 import com.example.Traverller_Odyssey_Backend.services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -39,6 +40,7 @@ public class GameController {
         String result = gameService.processInput(input);
 
         if (result.startsWith("[NS]")) {
+            gameService.goToNextScene();
             notifySceneChange();
             return result.substring("[NS]".length());
         }

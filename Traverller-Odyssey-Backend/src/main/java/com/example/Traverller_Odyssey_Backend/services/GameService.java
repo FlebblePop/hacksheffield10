@@ -28,7 +28,6 @@ public class GameService {
                     return "Hello " + input + "\nNow set your pronouns! Add them and then type 'done' when finished!";
                 } else {
                     if (input.equalsIgnoreCase("done")) {
-                        gameState.goToNextScene();
                         return "[NS]Your pronouns have been set as: " + gameState.getPlayer().getPronouns().toString()
                                 + "\nWelcome to the tavern";
                     } else {
@@ -83,7 +82,6 @@ public class GameService {
                     }
                 }
             } else if (input.equals("next scene")) {
-                gameState.goToNextScene();
                 return "[NS]New Scene!";
             } else {
                 return "Unrecognised action";
@@ -122,8 +120,7 @@ public class GameService {
                     }
 
                     if (killedAllPirates) {
-                        gameState.goToNextScene();
-                        return "[NS]changing to scene 3";
+                        return "[NS]Changing to scene 3";
                     }
 
                     return "not all the pirates are dead";
@@ -136,9 +133,7 @@ public class GameService {
             if (input.isEmpty()) {
                 return "Please enter an action";
             } else if (input.equals("next scene")) {
-                gameState.goToNextScene();
-
-                return "changing to scene 4";
+                return "[NS]Changing to scene 4";
             } else {
                 return "Unrecognised action";
             }
@@ -146,9 +141,7 @@ public class GameService {
             if (input.isEmpty()) {
                 return "Please enter an action";
             } else if (input.equals("next scene")) {
-                gameState.goToNextScene();
-
-                return "changing to scene 5";
+                return "[NS]Changing to scene 5";
             } else {
                 return "Unrecognised action";
             }
@@ -159,5 +152,9 @@ public class GameService {
 
     public String getImagePath() {
         return gameState.getCurrentScene().getImagePath();
+    }
+
+    public void goToNextScene() {
+        gameState.goToNextScene();
     }
 }
