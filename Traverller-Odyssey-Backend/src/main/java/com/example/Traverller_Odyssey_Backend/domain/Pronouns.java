@@ -25,4 +25,9 @@ public class Pronouns {
     public void setPronoun(String pronoun) { this.pronoun = pronoun; }
 
     public void setPerson(Person person) { this.person = person; }
+
+    @Override
+    public String toString() {
+        return pronoun;
+    }
 }
