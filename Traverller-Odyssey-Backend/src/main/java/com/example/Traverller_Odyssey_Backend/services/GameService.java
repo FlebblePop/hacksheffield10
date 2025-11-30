@@ -16,6 +16,7 @@ public class GameService {
             if (!input.isEmpty()) {
                 GameState.getPlayer().setName(input);
                 GameState.goToNextScene();
+                System.out.println(GameState.getCurrentScene().getId());
 
                 return "Hello " + input;
             } else {
