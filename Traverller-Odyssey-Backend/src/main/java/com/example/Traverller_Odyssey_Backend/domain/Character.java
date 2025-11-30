@@ -21,36 +21,46 @@ public class Character extends Person {
 
     private final OpenAIClient client;
 
-    private final List<String> chatHistory = new ArrayList<>();
-
+    // Add: in-memory chat history to preserve conversation context
+    private final List<ChatMessage> chatHistory = new ArrayList<>();
 
     public Character(String name, String prompt) {
         super(name);
 
         String apiKey = System.getenv("OPENAI_API_KEY");
 
-        chatHistory.add(prompt);
+        this.prompt = prompt;
 
         this.client = OpenAIOkHttpClient.builder()
                 .apiKey(apiKey)
                 .build();
     }
 
+    public String getPrompt() {return prompt;}
+
     public String askOpenAI(String userMessage) {
+        System.out.println("_History with " + getName() +"_ ");
+        printHistory();
+        // Add the new user message to history
+        chatHistory.add(new ChatMessage("user", userMessage));
 
-        // Append user message to history
-        chatHistory.add("User: " + userMessage);
+        // Build a single combined prompt: system prompt + alternating history entries
+        StringBuilder combined = new StringBuilder();
+        if (this.prompt != null && !this.prompt.isEmpty()) {
+            combined.append("System: ").append(this.prompt.trim()).append("\n\n");
+        }
 
-        // Build the full conversation string
-        StringBuilder fullPrompt = new StringBuilder(userMessage);
-
-        for (String msg : chatHistory) {
-            fullPrompt.append(msg).append("\n");
+        for (ChatMessage m : chatHistory) {
+            if ("user".equalsIgnoreCase(m.role)) {
+                combined.append("User: ").append(m.content.trim()).append("\n\n");
+            } else {
+                combined.append("Assistant: ").append(m.content.trim()).append("\n\n");
+            }
         }
 
         // Build request
         ResponseCreateParams createParams = ResponseCreateParams.builder()
-                .input(fullPrompt.toString())
+                .input(combined.toString())
                 .model(ChatModel.GPT_5_MINI)
                 .build();
 
@@ -60,19 +70,56 @@ public class Character extends Person {
                 .flatMap(item -> item.message().stream())
                 .flatMap(message -> message.content().stream())
                 .flatMap(content -> content.outputText().stream())
-                .forEach(outputText -> output.append(outputText.text()));
+                .forEach(outputText -> {
+                    String text = outputText.text();
 
-        // Store the AI response
-        String aiReply = output.toString();
-        chatHistory.add("AI: " + aiReply);
+                    // Append text for returning
+                    output.append(text);
+                });
 
-        System.out.println(aiReply);
-        return aiReply;
+        String assistantReply = output.toString().trim();
+
+        // Append assistant reply to history so next call has context
+        if (!assistantReply.isEmpty()) {
+            chatHistory.add(new ChatMessage("assistant", assistantReply));
+        }
+
+        // Return the complete output as a single string
+        return assistantReply;
     }
 
+    // Optional helper to clear chat history
+    public void resetHistory() {
+        chatHistory.clear();
+    }
+
+    public void printHistory() {
+        StringBuilder combined = new StringBuilder();
+
+        for (ChatMessage m : chatHistory) {
+            if ("user".equalsIgnoreCase(m.role)) {
+                combined.append("User: ").append(m.content.trim()).append("\n\n");
+            } else {
+                combined.append("Assistant: ").append(m.content.trim()).append("\n\n");
+            }
+        }
+
+        System.out.println(combined.toString());
+    }
 
     public CharacterDTO toDTO() {
         CharacterDTO dto = new CharacterDTO();
         return dto;
+    }
+
+    // Lightweight inner message class for role/content
+    private static class ChatMessage {
+        final String role;
+        final String content;
+
+        ChatMessage(String role, String content) {
+            this.role = role;
+            this.content = content;
+        }
     }
 }
