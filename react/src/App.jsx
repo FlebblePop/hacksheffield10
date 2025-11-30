@@ -20,9 +20,9 @@ function App() {
 
     const client = {
         getInitialText: () => request("/scene", "GET")
-            .then((response) => { setDisplayText(response.data); console.log(response.data)}),
+            .then((response) => { setDisplayText(response.data); }),
         getImage: () => request("/image", "GET")
-            .then((response) => { setImagePath(response.data); console.log(response.data)}),
+            .then((response) => { setImagePath(response.data); }),
         getResponse: (data) => request("/"+data, "GET")
             .then((response) => { setDisplayText(response.data); }),
     };
