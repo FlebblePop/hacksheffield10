@@ -36,7 +36,8 @@ public class Character extends Person {
                 .build();
     }
 
-    // Replace askOpenAI to include chat history and to append assistant reply back to history
+    public String getPrompt() {return prompt;}
+
     public String askOpenAI(String userMessage) {
         System.out.println("_History with " + getName() +"_ ");
         printHistory();
@@ -57,6 +58,7 @@ public class Character extends Person {
             }
         }
 
+        // Build request
         ResponseCreateParams createParams = ResponseCreateParams.builder()
                 .input(combined.toString())
                 .model(ChatModel.GPT_5_MINI)
