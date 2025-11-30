@@ -26,16 +26,16 @@ public class GameService {
         if (gameState.getCurrentScene().getId() == 0) {
             if (!input.isEmpty()) {
                 if (!gameState.nameGiven) {
-                    gameState.getPlayer().setName(input);
+                    player.setName(input);
                     gameState.nameGiven = true;
                     return "Hello " + input + "\nNow set your pronouns! Add them and then type 'done' when finished!";
                 } else {
                     if (input.equalsIgnoreCase("done")) {
-                        return "[NS]Your pronouns have been set as: " + gameState.getPlayer().getPronouns().toString()
+                        return "[NS]Your pronouns have been set as: " + player.getPronouns().toString()
                                 + "\nWelcome to the tavern";
                     } else {
-                        gameState.getPlayer().addPronouns(new Pronouns(input, gameState.getPlayer()));
-                        System.out.println(gameState.getPlayer().getPronouns());
+                        player.addPronouns(new Pronouns(input, player));
+                        System.out.println(player.getPronouns());
                         return "Added " + input + " pronouns! \ntype 'done' when finished!";
                     }
 
@@ -44,15 +44,15 @@ public class GameService {
                 return "Please enter your name";
             }
         } else if (input.contains("poo")) {
-            gameState.getPlayer().setPooCounter(gameState.getPlayer().getPooCounter() + 1);
-            if (gameState.getPlayer().getPooCounter() == 3) {
+            player.setPooCounter(player.getPooCounter() + 1);
+            if (player.getPooCounter() == 3) {
                 return "SHATRICK! You have pood 3 times! Wow! You must really love pooing! Can you poo 100 times? " +
                         "If you do, there'll be a special easter egg! Im waiting. Im waiting for more poo.";
-            } else if (gameState.getPlayer().getPooCounter() == 100) {
+            } else if (player.getPooCounter() == 100) {
                 return "Why have you pood that much. I never asked you to do that. That's too much poo.";
             }
             return "You have pood. Your Poo Counter has been incremented. It is now: "
-                    + gameState.getPlayer().getPooCounter();
+                    + player.getPooCounter();
         } else if (gameState.getCurrentScene().getId() == 1) {
             if (input.isEmpty()) {
                 return "Please enter an action";
