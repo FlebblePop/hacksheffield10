@@ -23,7 +23,7 @@ function App() {
             .then((response) => { setDisplayText(response.data); console.log(response.data)}),
         getImage: () => request("/image", "GET")
             .then((response) => { setImagePath(response.data); console.log(response.data)}),
-        sendInput: (data) => request("/", "POST", data)
+        getResponse: (data) => request("/"+data, "GET")
             .then((response) => { setDisplayText(response.data); }),
     };
 
@@ -50,7 +50,7 @@ function App() {
 
     const handleSubmit = () => {
         if (inputText.trim()) {
-            client.sendInput(inputText)
+            client.getResponse(inputText)
             setInputText('');
         }
     };

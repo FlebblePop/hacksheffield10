@@ -15,7 +15,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping({"", "/"})
-@CrossOrigin
 public class GameController {
 
     private final GameService gameService;
