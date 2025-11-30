@@ -28,7 +28,7 @@ public class GameController {
     public @ResponseBody String getIntroText() {
         return gameService.getIntroText();
     }
-    
+
     @GetMapping(value = "/image")
     public @ResponseBody String getImagePath() {
         return gameService.getImagePath();
