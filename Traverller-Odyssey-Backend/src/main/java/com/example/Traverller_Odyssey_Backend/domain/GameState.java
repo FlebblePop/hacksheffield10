@@ -34,7 +34,7 @@ public class GameState {
     private final Scene scene4 = new Scene(4, "island",
             "You managed to get to sure safely, as you regain your breath, you look around the island to find a small sandy shore with a few trees and not much more.\n\nAvailable actions:\n- rescuer: (message)\n- Gather resources\n- Create an SOS sign",
             new ArrayList<>(Arrays.asList(mary, anne, mugsy, rescuer)));
-    private final Scene scene5 = new Scene(5, "", "Congratulations! You survived!",
+    private final Scene scene5 = new Scene(5, "win", "Congratulations! You survived!",
             new ArrayList<>());
 
     private final Scene deathScene = new Scene(-1, "death_screen", "Unlucky", new ArrayList<>());
