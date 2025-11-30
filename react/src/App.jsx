@@ -1,9 +1,48 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+import axios from "axios";
+
 import './index.css';
 
 function App() {
-    const [inputText, setInputText] = useState('');
-    const [displayText, setDisplayText] = useState('Welcome! Your text will appear here.');
+    const [imagePath, setImagePath] = useState("waiting");
+    const [displayText, setDisplayText] = useState("");
+    const [inputText, setInputText] = useState("");
+
+
+    const BASE_URL = "http://localhost:8080"
+
+    const request = (url, method, data={}) => axios({
+        method,
+        url: `${BASE_URL}${url}`,
+        data
+    })
+
+    const client = {
+        getInitialText: () => request("/scene", "GET")
+            .then((response) => { setDisplayText(response.data); console.log(response.data)}),
+        getImage: () => request("/image", "GET")
+            .then((response) => { setImagePath(response.data); console.log(response.data)}),
+        sendInput: (data) => request("/", "POST", data)
+            .then((response) => { setDisplayText(response.data); }),
+    };
+
+    // Load initial data when component mounts
+    useEffect(() => {
+        const loadInitialData = async () => {
+            try {
+                // Load initial text
+                await client.getInitialText();
+
+                // Load initial image
+                await client.getImage();
+            } catch (error) {
+                console.error("Error loading initial data:", error);
+            }
+        };
+
+        loadInitialData();
+    }, []); // Empty dependency array means this runs once on mount
 
     const handleInputChange = (e) => {
         setInputText(e.target.value);
@@ -11,7 +50,7 @@ function App() {
 
     const handleSubmit = () => {
         if (inputText.trim()) {
-            setDisplayText(inputText);
+            client.sendInput(inputText)
             setInputText('');
         }
     };
@@ -23,7 +62,7 @@ function App() {
                 <div className="image-container">
                     <div className="image-wrapper">
                         <img
-                            src=""
+                            src={`/${imagePath}.png`}
                             alt="Game scene"
                             className="image"
                         />

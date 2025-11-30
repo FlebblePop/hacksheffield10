@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping({"", "/"})
+@CrossOrigin
 public class GameController {
 
     private final GameService gameService;
@@ -24,7 +25,8 @@ public class GameController {
         this.gameService = gameService;
     }
 
-    @GetMapping({"", "/"})
+
+    @GetMapping({"/scene"})
     public @ResponseBody String getIntroText() {
         return gameService.getIntroText();
     }
