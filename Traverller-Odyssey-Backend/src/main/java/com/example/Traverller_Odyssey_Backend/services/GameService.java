@@ -18,6 +18,7 @@ public class GameService {
     private boolean Mary = false;
     private boolean Anne = false;
     private boolean Mugsy = false;
+    private boolean Boat = false;
 
     public String getIntroText() {
         return gameState.getCurrentScene().getIntroText();
@@ -63,7 +64,7 @@ public class GameService {
         } else if (gameState.getCurrentScene().getId() == 1) {
             if (input.isEmpty()) {
                 return "Please enter an action";
-            } else if (input.equals("next scene")) {
+            } else if (Boat && input.equals("leave tavern")) {
                 return "[NS]New Scene!";
             } else if (input.equals("death scene")) {
                 return "[DS]You Died";
@@ -98,20 +99,24 @@ public class GameService {
                         Random r= new Random();
                         int r1 = r.nextInt(3);
                         String extra="";
+                        String response = character.askOpenAI(input.substring(input.indexOf(":")));
+                        String talkToNPC = character.askOpenAI("You notice that " + characters.get(r1).getName() + "is looking at you");
+                        if (response.contains("Okay, you can have my boat")) {
+                            Boat = true;
+                            response += "\n[You have acquired a boat]";
+                        }
                         for (int i = 0; i < r1; i++) {
                             if (characters.get(i).getName().equals("Mary")) {
-                                extra = "Mary: " + characters.get(i).askOpenAI("Herk, the local tavern owner gives you an endearing smile");
+                                extra = "Mary: " + characters.get(i).askOpenAI("Herk, the local tavern owner told you " + talkToNPC);
                             }
                             if (characters.get(i).getName().equals("Anne")) {
-                                extra = "Anne: " + characters.get(i).askOpenAI("Herk, the local tavern owner gives you an endearing smile");
+                                extra = "Anne: " + characters.get(i).askOpenAI("Herk, the local tavern owner told you " + talkToNPC);
                             }
                             if (characters.get(i).getName().equals("Mugsy")) {
-                                extra = "Mugsy" + characters.get(i).askOpenAI("Herk, the local tavern owner gives you an endearing smile");
+                                extra = "Mugsy" + characters.get(i).askOpenAI("Herk, the local tavern owner told you " + talkToNPC);
                             }
                         }
-                        String response = character.askOpenAI(input.substring(input.indexOf(":")));
-                        response = response.contains("Okay, you can have my boat") ? response + "\n[You have acquired a boat]" : response;
-                        return "Herk: " + response + "\n\n" + extra;
+                        return "Herk: " + response + "\n" + talkToNPC + "\n\n" + extra;
                     }
                 }
             } else if (input.startsWith("mugsy")) {
@@ -186,7 +191,7 @@ public class GameService {
                 List<Character> characters = gameState.getCurrentScene().getCharacters();
                 for (Character character : characters) {
                     if (character.getName().equals("Rescuer")) {
-                        return character.askOpenAI(input.substring(input.indexOf(":")));
+                        return "Hubert: " + character.askOpenAI(input.substring(input.indexOf(":")));
                     }
                 }
             } else {
