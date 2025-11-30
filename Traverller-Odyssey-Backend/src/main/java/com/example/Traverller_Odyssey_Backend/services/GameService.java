@@ -64,8 +64,12 @@ public class GameService {
         } else if (gameState.getCurrentScene().getId() == 1) {
             if (input.isEmpty()) {
                 return "Please enter an action";
-            } else if (Boat && input.equals("leave tavern")) {
-                return "[NS]New Scene!";
+            } else if (input.equals("leave tavern")) {
+                if (Boat) {
+                    return "[NS]New Scene!";
+                }
+
+                return "I need some sort of transport to leave the tavern";
             } else if (input.equals("help")) {
                 return gameState.getCurrentScene().getIntroText();
             } else if (input.equals("death scene")) {
