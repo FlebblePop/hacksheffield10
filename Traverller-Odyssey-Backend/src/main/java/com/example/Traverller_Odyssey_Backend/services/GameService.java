@@ -90,65 +90,7 @@ public class GameService {
                 return "Unrecognised action";
             }
         } else if (gameState.getCurrentScene().getId() == 2) {
-            String[] input_words = input.split(" ");
-
-            if (input_words.length == 3 && input_words[0].equals("attack") && input_words[1].equals("pirate")
-                    && (input_words[2].equals("1") || input_words[2].equals("2") || input_words[2].equals("3"))) {
-                List<Character> characters = gameState.getCurrentScene().getCharacters();
-                for (Character character : characters) {
-                    if (character.getName().toLowerCase().equals(input_words[1] + input_words[2])) {
-                        if (character.getHp() <= 0) {
-                            return character.getName() + " is already dead";
-                        }
-
-                        int playerDamage = (int)(Math.random() * 6 + 4);
-                        character.setHp(character.getHp() - playerDamage);
-
-                        int pirateDamage = 0;
-
-                        for (Character c : gameState.getCurrentScene().getCharacters()) {
-                            if (c.getName().contains("Pirate") && c.getHp() > 0) {
-                                pirateDamage += (int)(Math.random() * 3);
-                            }
-                        }
-
-                        player.setHp(player.getHp() - pirateDamage);
-                        String pirateDamageString;
-
-                        if (player.getHp() <= 0) {
-                            pirateDamageString = "\n\nThe pirates killed you.";
-                        } else {
-                            pirateDamageString = "\n\nThe pirates did " + pirateDamage + " damage to you.";
-                        }
-
-                        if (character.getHp() <= 0) {
-                            return "You killed " + character.getName() + pirateDamageString;
-                        }
-                        return "You dealt " + playerDamage + " damage to " + character.getName() + pirateDamageString;
-                    }
-                }
-            }
-
-            switch (input) {
-                case "go to the island":
-                    boolean killedAllPirates = true;
-
-                    for (Character character : gameState.getCurrentScene().getCharacters()) {
-                        if (character.getName().contains("Pirate") && character.getHp() > 0) {
-                            killedAllPirates = false;
-                        }
-                    }
-
-                    if (killedAllPirates) {
-                        return "[NS]Changing to scene 3";
-                    }
-
-                    return "not all the pirates are dead";
-                case "help":
-                    return gameState.getCurrentScene().getIntroText();
-                default:
-                    return "Unrecognised action";
-            }
+            return handleScene2Input(input);
         } else if (gameState.getCurrentScene().getId() == 3) {
             if (input.isEmpty()) {
                 return "Please enter an action";
@@ -168,6 +110,71 @@ public class GameService {
         }
 
         return input;
+    }
+
+    public String handleScene2Input(String input) {
+        Player player = gameState.getPlayer();
+        String[] input_words = input.split(" ");
+
+        if (input_words.length == 3 && input_words[0].equals("attack") && input_words[1].equals("pirate")
+                && (input_words[2].equals("1") || input_words[2].equals("2") || input_words[2].equals("3"))) {
+            List<Character> characters = gameState.getCurrentScene().getCharacters();
+            for (Character character : characters) {
+                if (character.getName().toLowerCase().equals(input_words[1] + input_words[2])) {
+                    if (character.getHp() <= 0) {
+                        return character.getName() + " is already dead";
+                    }
+
+                    int playerDamage = (int)(Math.random() * 6 + 4);
+                    character.setHp(character.getHp() - playerDamage);
+
+                    int pirateDamage = 0;
+
+                    for (Character c : gameState.getCurrentScene().getCharacters()) {
+                        if (c.getName().contains("Pirate") && c.getHp() > 0) {
+                            pirateDamage += (int)(Math.random() * 3);
+                        }
+                    }
+
+                    player.setHp(player.getHp() - pirateDamage);
+                    String pirateDamageString;
+
+                    System.out.println(player.getHp());
+
+                    if (player.getHp() <= 0) {
+                        pirateDamageString = "\n\nThe pirates killed you.";
+                    } else {
+                        pirateDamageString = "\n\nThe pirates did " + pirateDamage + " damage to you.";
+                    }
+
+                    if (character.getHp() <= 0) {
+                        return "You killed " + character.getName() + pirateDamageString;
+                    }
+                    return "You dealt " + playerDamage + " damage to " + character.getName() + pirateDamageString;
+                }
+            }
+        }
+
+        switch (input) {
+            case "go to the island":
+                boolean killedAllPirates = true;
+
+                for (Character character : gameState.getCurrentScene().getCharacters()) {
+                    if (character.getName().contains("Pirate") && character.getHp() > 0) {
+                        killedAllPirates = false;
+                    }
+                }
+
+                if (killedAllPirates) {
+                    return "[NS]Changing to scene 3";
+                }
+
+                return "not all the pirates are dead";
+            case "help":
+                return gameState.getCurrentScene().getIntroText();
+            default:
+                return "Unrecognised action";
+        }
     }
 
     public String getImagePath() {
