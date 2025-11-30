@@ -92,13 +92,7 @@ public class GameService {
         } else if (gameState.getCurrentScene().getId() == 2) {
             return handleScene2Input(input);
         } else if (gameState.getCurrentScene().getId() == 3) {
-            if (input.isEmpty()) {
-                return "Please enter an action";
-            } else if (input.equals("next scene")) {
-                return "[NS]Changing to scene 4";
-            } else {
-                return "Unrecognised action";
-            }
+            return handleScene3Input(input);
         } else if (gameState.getCurrentScene().getId() == 4) {
             if (input.isEmpty()) {
                 return "Please enter an action";
@@ -174,6 +168,16 @@ public class GameService {
                 return gameState.getCurrentScene().getIntroText();
             default:
                 return "Unrecognised action";
+        }
+    }
+
+    public String handleScene3Input(String input) {
+        if (input.equals("swim to shore")) {
+            return "[NS]You made it to the shore";
+        } else if (input.equals("help")) {
+            return gameState.getCurrentScene().getIntroText();
+        } else {
+            return "Unrecognised action";
         }
     }
 
