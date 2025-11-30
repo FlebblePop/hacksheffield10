@@ -11,11 +11,8 @@ public abstract class Person {
 
     private List<String> inventory;
 
-    private Integer money;
     private Integer hp;
     private Integer maxHp;
-    private Integer strength;
-    private Integer agility;
 
     private List <Pronouns> pronouns;
 
@@ -24,11 +21,8 @@ public abstract class Person {
     public Person(String name) {
         this.name = name;
         this.inventory = new ArrayList<>();
-        this.money = 0;
         this.maxHp = 20;
         this.hp = this.maxHp;
-        this.strength = 10;
-        this.agility = 10;
         this.pronouns = new ArrayList<>();
     }
 
@@ -44,20 +38,8 @@ public abstract class Person {
         this.inventory = inventory;
     }
 
-    public void setMoney(Integer money) {
-        this.money = money;
-    }
-
     public void setHp(Integer hp) {
         this.hp = hp;
-    }
-
-    public void setStrength(Integer strength) {
-        this.strength = strength;
-    }
-
-    public void setAgility(Integer agility) {
-        this.agility = agility;
     }
 
     public void setPronouns(List<Pronouns> pronouns) {
@@ -80,13 +62,7 @@ public abstract class Person {
 
     public List<String> getInventory() { return inventory; }
 
-    public Integer getMoney() { return money; }
-
     public Integer getHp() { return hp; }
-
-    public Integer getStrength() { return strength; }
-
-    public Integer getAgility() { return agility; }
 
     public List<Pronouns> getPronouns() { return pronouns.stream().toList(); }
 
