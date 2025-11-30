@@ -20,29 +20,46 @@ function App() {
 
     const client = {
         getInitialText: () => request("/scene", "GET")
-            .then((response) => { setDisplayText(response.data); console.log(response.data)}),
+            .then((response) => { setDisplayText(response.data); }),
         getImage: () => request("/image", "GET")
-            .then((response) => { setImagePath(response.data); console.log(response.data)}),
+            .then((response) => { setImagePath(response.data); }),
         getResponse: (data) => request("/"+data, "GET")
             .then((response) => { setDisplayText(response.data); }),
     };
 
+    // Function to refresh scene data
+    const refreshScene = async () => {
+        try {
+            await client.getInitialText();
+            await client.getImage();
+            console.log("Got new scene")
+        } catch (error) {
+            console.error("Error refreshing scene:", error);
+        }
+    };
+
     // Load initial data when component mounts
     useEffect(() => {
-        const loadInitialData = async () => {
-            try {
-                // Load initial text
-                await client.getInitialText();
+        refreshScene();
+    }, []); // Empty dependency array means this runs once on mount
 
-                // Load initial image
-                await client.getImage();
-            } catch (error) {
-                console.error("Error loading initial data:", error);
-            }
+    // Set up SSE connection for scene updates
+    useEffect(() => {
+        const eventSource = new EventSource(`${BASE_URL}/scene-updates`);
+
+        eventSource.addEventListener('sceneChange', (event) => {
+            refreshScene();
+        });
+
+        eventSource.onerror = (error) => {
+            console.error('SSE error:', error);
         };
 
-        loadInitialData();
-    }, []); // Empty dependency array means this runs once on mount
+        // Cleanup on unmount
+        return () => {
+            eventSource.close();
+        };
+    }, []);
 
     const handleInputChange = (e) => {
         setInputText(e.target.value);
@@ -57,6 +74,9 @@ function App() {
 
     return (
         <div className="container">
+            <div className="title">
+                <h1>Travellers Odyssey</h1>
+            </div>
             <div className="wrapper">
                 {/* Main Image with Text Overlay */}
                 <div className="image-container">

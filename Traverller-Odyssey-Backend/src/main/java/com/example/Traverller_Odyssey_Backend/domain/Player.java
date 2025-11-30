@@ -3,7 +3,6 @@ package com.example.Traverller_Odyssey_Backend.domain;
 import com.example.Traverller_Odyssey_Backend.dto.PlayerDTO;
 import jakarta.persistence.*;
 
-@Entity
 public class Player extends Person {
     private Integer pooCounter;
     private Integer intelligence;

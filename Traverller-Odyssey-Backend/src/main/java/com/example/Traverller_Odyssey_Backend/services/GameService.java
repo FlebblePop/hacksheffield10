@@ -26,6 +26,12 @@ public class GameService {
             }
         } else if (input.contains("poo")) {
             gameState.getPlayer().setPooCounter(gameState.getPlayer().getPooCounter() + 1);
+            if (gameState.getPlayer().getPooCounter() == 3) {
+                return "SHATRICK! You have pood 3 times! Wow! You must really love pooing! Can you poo 100 times? " +
+                        "If you do, there'll be a special easter egg! Im waiting. Im waiting for more poo.";
+            } else if (gameState.getPlayer().getPooCounter() == 100) {
+                return "Why have you pood that much. I never asked you to do that. That's too much poo.";
+            }
             return "You have pood. Your Poo Counter has been incremented. It is now: "
                     + gameState.getPlayer().getPooCounter();
         } else if (gameState.getCurrentScene().getId() == 1) {
